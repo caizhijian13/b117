@@ -1,5 +1,7 @@
 package com.dhu.kgproject.repositories;
 
+import com.dhu.kgproject.domain.Company;
+import com.dhu.kgproject.domain.FabricInstance;
 import com.dhu.kgproject.domain.Node;
 import org.neo4j.cypher.internal.frontend.v2_3.ast.functions.Str;
 import org.springframework.data.neo4j.annotation.Query;
@@ -7,6 +9,7 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface NodeRepository extends Neo4jRepository<Node,Long> {
@@ -42,4 +45,18 @@ public interface NodeRepository extends Neo4jRepository<Node,Long> {
     @Query("match(n)-[r*1..]->(m) where id(n)={id} return count(distinct m)")
     Integer numOfKids(@Param("id") Long id);
 
+    @Query("match(n) return id(n)")
+    List<Long> IdList();
+
+    @Query("match(n)-[r]->(m) where id(r) = {id} return r.relativity")
+    Double selectRelativity(@Param("id")Long id);
+
+    @Query("match(n) where id(n)={id} set n.size = {size}")
+    void setSize(@Param("id")Long id,@Param("size")Double size);
+
+    @Query("CALL db.propertyKeys() YIELD propertyKey AS prop\n" +
+            "MATCH (n)\n" +
+            "WHERE id(n)={id} and n[prop] IS NOT NULL \n" +
+            "RETURN prop")
+    List<String> findProperties(@Param("id")Long id);
 }

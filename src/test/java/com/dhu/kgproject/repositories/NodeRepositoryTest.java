@@ -1,5 +1,7 @@
 package com.dhu.kgproject.repositories;
 
+import com.dhu.kgproject.domain.Company;
+import com.dhu.kgproject.domain.FabricInstance;
 import com.dhu.kgproject.domain.Node;
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,12 +23,34 @@ public class NodeRepositoryTest {
     @Autowired
     NodeRepository repository;
 
+    @Autowired
+    CompanyRepository companyRepository;
 //    @Test
 //    public void findOne(){
 //        Node result = repository.findNodeByName("asd标准");
 ////        Assert.assertNotNull(result);
 //        System.out.println(result.getName());
 //    }
+
+    @Test
+    public void findFaric(){
+        Collection<FabricInstance> nodes = companyRepository.findFabricInstance("牛津布");
+        if(nodes.isEmpty()){
+            System.out.println("null");
+        }
+        else
+            for (FabricInstance node:nodes){
+                System.out.println(node.getName());
+            }
+    }
+
+    @Test
+    public void findCompany(){
+        Company node = companyRepository.findCompanyByFabric(" 珍珠罗马布");
+
+                System.out.println(node.getName());
+    }
+
 
     @Test
     public void findLike(){

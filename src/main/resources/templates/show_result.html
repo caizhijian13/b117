@@ -36,7 +36,7 @@
 
 </head>
 <style>
-    .text { font-size: 10px; pointer-events: none; }
+    .text { font-size: 14px; pointer-events: none; }
     .node { fill:#bee0fc; stroke: #bee0fc; stroke-width: 1px; }
     .node.no1{fill:#483d8b;}
     .node.no2{fill:#4169e1;}
@@ -54,6 +54,8 @@
     .node.Design{fill:#F5FFFA;}
     .node.Example{fill:#F5FFFA;}
     .link { stroke: #999; stroke-opacity: .6; stroke-width: 3px; }
+    .link.fit { stroke: #cd201f; stroke-opacity: .6; stroke-width: 3px;}
+    .link.unfit {stroke: #00ad45; stroke-opacity: .6; stroke-width: 3px;}
     a{text-decoration:none;}
     a:hover{text-decoration:none; color:black;}
     .img-responsive { display: block; height: auto; max-width: 90%; }
@@ -77,30 +79,30 @@
                 <ul class="nav navbar-nav navbar-left">
                     <li>
                         <!--<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">-->
-                        <a href="http://10.199.157.176:8081">首页</a>
+                        <a href="/index">首页</a>
                         <!--</button>-->
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">相关知识导航 <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="http://10.199.157.176:8000">服装设计知识</a> </li>
-                            <li><a href="http://10.199.157.176:5000">面辅料信息检索</a> </li>
-                            <li><a href="http://10.199.157.176:8080">流行趋势速知</a> </li>
-                            <li><a href="/standards">工业4.0相关标准</a> </li>
-                        </ul>
+                    <li >
+                        <a href="/test" >穿戴搭配 </a>
+                    </li>
+                    <li >
+                        <a href="/colors" >潮流速递 </a>
+                    </li>
+                    <li >
+                        <a href="/fabric" >面料厂家 </a>
                     </li>
                 </ul>
                 <!--<div class="clearfix"> </div>-->
                 <!--&lt;!&ndash;notification menu end &ndash;&gt;-->
                 <!--<div class="clearfix"> </div>-->
             </div>
-            <div class="header-left">
+            <div class="header-left" style="margin-left: 5%">
 
                 <!--search-box-->
-                <div class="row" style="margin-top: 10px">
+                <div class="row" style="margin-top: 1%">
                     <form class="input" id="search_head" action="/search" method="post">
                         <div class="col-md-8">
-                            <input class="sb-search-input input__field--madoka" name="search_name" placeholder="Search..." type="search" id="search"  />
+                            <input class="sb-search-input input__field--madoka" name="search_name" placeholder="Search..." type="search" id="search" />
                             <label class="input__label" for="search">
                                 <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
                                     <path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
@@ -119,6 +121,18 @@
                 <!--<div class="clearfix"> </div>-->
                 <!--</div>-->
                 <!--<div class="clearfix"> </div>-->
+            </div>
+            <div class="profile_details_right">
+                <ul class="nav navbar-nav navbar-left">
+                    <li th:unless="${session.username}"><a href="/login">登录</a></li>
+                    <li th:unless="${session.username}"><a href="/register">注册</a></li>
+                    <li th:if="${session.username}" class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> [[${session.username}]] <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/logout">退出登录</a> </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -220,162 +234,6 @@
     //     draw(d_name);
     // })
 
-    // function drawById(id) {
-    //     $("#graph").empty();
-    //     var mark = id;
-    //     var width = 1200;
-    //     var height = 500;
-    //
-    //     var force = d3.layout.force()
-    //         .size([width,height])    //指定范围
-    //         .linkDistance(100)       //指定连线长度
-    //         .charge(-400);           //相互之间的作用力
-    //
-    //     var svg = d3.select("#graph").append("svg")
-    //         .attr("width",width).attr("height",height)
-    //         .attr("pointer-events","all");
-    //
-    //     d3.json("/selectgraphById?id="+mark,function (error,graph) {
-    //         if(error) return;
-    //
-    //         force.nodes(graph.nodes).links(graph.links).start();
-    //
-    //         //箭头
-    //         var marker = svg.append("marker")
-    //             .attr("id","resolved")
-    //             .attr("markerUnits","userSpaceOnUse")
-    //             .attr("viewBox","0 -5 10 10")   //坐标系的区域
-    //             .attr("refX",32)
-    //             .attr("refY",-1)
-    //             .attr("markerWidth",10)//标识的大小
-    //             .attr("markerHeight",10)
-    //             .attr("orient","auto")//绘制方向，可设定为：auto（自动确认方向）和角度值
-    //             .attr("stroke-width",2)//箭头宽度
-    //             .append("path")
-    //             .attr("d","M0,-5L10,0L0,5")//箭头的路径
-    //             .attr('fill','#000000');//箭头颜色
-    //
-    //         //设置连接线
-    //         var svg_edges = svg.selectAll(".link")
-    //             .data(graph.links)
-    //             .enter()
-    //             .append("line")
-    //             .attr({
-    //                 // 'd': function (d) { return 'M '+d.source.x+' '+d.source.y+' L '+d.target.x+' '+d.target.y},
-    //                 'class': 'link',
-    //                 'id':function (d,i) {return 'link'+i;}
-    //             })
-    //             .attr("marker-end","url(#resolved)")//根据箭头标记的id号标记箭头
-    //
-    //         //线上文字
-    //         var links_text = svg
-    //             .selectAll(".text")
-    //             .data(graph.links)
-    //             .enter()
-    //             .append("text")
-    //             .style("fill","black")
-    //             .attr("x",function(e){
-    //                 console.log(e.source.x+"+"+e.target.x);
-    //                 return (e.source.x+e.target.x)/2;
-    //             })
-    //             .attr("y",function(e){
-    //                 console.log(e.source.y+"+"+e.target.y);
-    //                 console.log(e.type);
-    //                 return (e.source.y+e.target.y)/2;
-    //             })
-    //             .attr("font-size",8)
-    //             .text(function(e){
-    //                 return e.type}); //线上文字
-    //
-    //         //添加节点
-    //         var svg_nodes = svg.selectAll(".node")
-    //             .data(graph.nodes)
-    //             .enter()
-    //             .append("circle")
-    //             .attr('r',function (d) {
-    //                 if(d.label=="node")
-    //                     return 30-2*d.label;
-    //                 else
-    //                     return 20;
-    //             })
-    //             .attr("class",function (d) {
-    //                 if(d.label=="node")
-    //                     return "node "+"no"+d.level;
-    //                 else
-    //                     return "node "+d.label;
-    //             })
-    //             // .on("click",function (d) {
-    //             //     nowname = d.name;
-    //             //     showDetail(d.id);
-    //             // })
-    //             .call(force.drag)
-    //             .on("dblclick",function (d) {
-    //                 nowname = d.name;
-    //                 var url = "/search?search_name="+d.name;
-    //                 if (d.name == "相关标准") {
-    //                     // var url = encodeURI("standards.html");
-    //                     location.href = "/standards";
-    //                 }
-    //                 else{
-    //                     drawById(d.id);
-    //                     var url1 = "/node?name="+d.name;
-    //                     search_d = "http://baike.baidu.com/item/"+d.name;
-    //                     $.get(url1,function (data) {
-    //                         $("#title").text(data.name);
-    //                         $("#p_describe").text(data.description);
-    //                         $("#detail_name").attr("href",search_d);
-    //                         $("#panel-input1").attr("value",data.id);
-    //                         // location.href = search_d;
-    //                     })
-    //                 }
-    //                 // location.href = url;
-    //
-    //             })
-    //         ;
-    //         svg_nodes.append("title")
-    //             .text(function (d) {
-    //                 return d.description;
-    //             })
-    //         //添加描述节点的文字
-    //         var svg_texts = svg.selectAll(".text")
-    //             .data(graph.nodes)
-    //             .enter()
-    //             .append("text")
-    //             .style("fill","black")
-    //             .attr("class","text")
-    //             .attr("text-anchor","middle")
-    //             .text(function (d) {
-    //                 return d.name;
-    //             })
-    //
-    //         force.on("tick",function () {  //对于每一个时间间隔
-    //
-    //             //更新连线坐标
-    //             svg_edges.attr("x1",function (d) {return d.source.x; })
-    //                 .attr("y1",function (d) {return d.source.y; })
-    //                 .attr("x2",function (d) {return d.target.x; })
-    //                 .attr("y2",function (d) {return d.target.y; })
-    //             //更新线上文字坐标
-    //             links_text
-    //                 .attr("x",function(e){
-    //                     return (e.source.x+e.target.x)/2;
-    //                 })
-    //                 .attr("y",function(e){
-    //                     return (e.source.y+e.target.y)/2;
-    //                 });
-    //             //更新节点坐标
-    //             svg_nodes.attr("cx",function (d) {return d.x=Math.max(20,Math.min(width-20,d.x)); })
-    //                 .attr("cy",function (d) {return d.y=Math.max(20,Math.min(width-20,d.y)); })
-    //
-    //             //更新文字坐标
-    //             svg_texts.attr("x",function (d) {return d.x; })
-    //                 .attr("y",function (d) {return d.y; })
-    //
-    //         });
-    //     });
-    //
-    // }
-
         function draw(id) {
             $("#graph").empty();
             var mark = id;
@@ -384,7 +242,7 @@
 
             var force = d3.layout.force()
                 .size([width,height])    //指定范围
-                .linkDistance(100)       //指定连线长度
+                .linkDistance(150)       //指定连线长度
                 .charge(-400);           //相互之间的作用力
 
             var svg = d3.select("#graph").append("svg")
@@ -418,8 +276,15 @@
                     .append("line")
                     .attr({
                         // 'd': function (d) { return 'M '+d.source.x+' '+d.source.y+' L '+d.target.x+' '+d.target.y},
-                        'class': 'link',
                         'id':function (d,i) {return 'link'+i;}
+                    })
+                    .attr("class",function (d) {
+                        if(d.type=="适合")
+                            return "link fit";
+                        else if(d.type=="不适合")
+                            return "link unfit";
+                        else
+                            return "link";
                     })
                     .attr("marker-end","url(#resolved)")//根据箭头标记的id号标记箭头
 
@@ -439,9 +304,14 @@
                         console.log(e.type);
                         return (e.source.y+e.target.y)/2;
                     })
-                    .attr("font-size",8)
+                    .attr("font-size",12)
                     .text(function(e){
                         return e.type}); //线上文字
+
+                links_text.append("title")
+                    .text(function (d) {
+                        return d.relativity;
+                    })
 
                 //添加节点
                 var svg_nodes = svg.selectAll(".node")
@@ -453,15 +323,15 @@
                         //     return 30-2*d.label;
                         // else
                         if(d.id == 2266)
-                            return 30
+                            return 35;
                         else
-                            var size = 20;
-                        $.get("/findKidsById?id="+d.id,function (data) {
-                            size = 20 + data/100;
-                        })
-                        $.ajax({url:"/findKidsById?id="+d.id,async:false,success:function (data) {
-                                size = 20 + data/150;
-                            }})
+                            var size = 25;
+                        // $.get("/findKidsById?id="+d.id,function (data) {
+                        //     size = 20 + data/100;
+                        // })
+                        // $.ajax({url:"/findKidsById?id="+d.id,async:false,success:function (data) {
+                        //         size = 20 + data/150;
+                        //     }})
                         return size;
                     })
                     .attr("class",function (d) {

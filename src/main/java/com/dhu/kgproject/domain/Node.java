@@ -27,6 +27,7 @@ public class Node {
     private String star;
     private String shortcoming;
     private String otherName;
+    private Double size;
 
     @JsonIgnore
     @org.neo4j.ogm.annotation.Relationship(type = "Include")
@@ -78,11 +79,11 @@ public class Node {
 
     @JsonIgnore
     @org.neo4j.ogm.annotation.Relationship(type = "适合")
-    private List<Relationship> fit;
+    private List<Fit> fit;
 
     @JsonIgnore
     @org.neo4j.ogm.annotation.Relationship(type = "不适合")
-    private List<Relationship> Unfit;
+    private List<Unfit> Unfit;
 
     @JsonIgnore
     @org.neo4j.ogm.annotation.Relationship(type = "匹配")

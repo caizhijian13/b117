@@ -330,7 +330,7 @@ ul.dropdown-menu{
 	-ms-user-select: none;
 	user-select: none;
 	position: absolute;
-	width: 93%;
+	width: 94%;
 	height: 100%;
     cursor: text;
 }
@@ -424,6 +424,10 @@ ul.dropdown-menu{
 .profile_details_left {
     float: left;
     padding-left: 5px;
+}
+.profile_details_right{
+    float: right;;
+    padding-right: 5px;
 }
 .dropdown-menu {
     box-shadow: 2px 3px 4px rgba(0, 0, 0, .175);

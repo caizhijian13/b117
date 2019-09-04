@@ -1,6 +1,9 @@
 package com.dhu.kgproject.controller;
 
+import com.dhu.kgproject.domain.Company;
+import com.dhu.kgproject.domain.FabricInstance;
 import com.dhu.kgproject.domain.Node;
+import com.dhu.kgproject.repositories.CompanyRepository;
 import com.dhu.kgproject.services.NodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,13 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/")
 public class NodeController {
+
+    @Autowired
+    private CompanyRepository companyRepository;
+
     @Autowired
     private NodeService nodeService;
 
@@ -28,6 +33,23 @@ public class NodeController {
     @ResponseBody
     public Collection<Node> findNodesByNameLike(@RequestParam String name){
         return nodeService.findNodesByNameLike(name);
+    }
+
+    @PostMapping("/search_fabric")
+    public ModelAndView findFabric(@RequestParam(value = "name",required = true) String name,Model model){
+        HashMap<String, ArrayList<String>> resultMap = new HashMap<>();
+        Collection<FabricInstance> fabrics = companyRepository.findFabricInstance(name);
+        for (FabricInstance fabric:fabrics) {
+            Company company = companyRepository.findCompanyByFabric(fabric.getName());
+            ArrayList<String> list = new ArrayList<String>();
+            list.add(fabric.getCompany());
+            list.add(fabric.getComponent());
+            list.add(company.getAddress());
+            list.add(company.getTel());
+            resultMap.put(fabric.getName(),list);
+        }
+        model.addAttribute("resultmap",resultMap);
+        return new ModelAndView("fabric","model",model);
     }
 
     @GetMapping("/graph")
@@ -85,12 +107,14 @@ public class NodeController {
     @RequestMapping("/search_detail")
     public ModelAndView showDetail(@RequestParam(value = "detailId") Long detailId,Model model){
         Node node = nodeService.selectNodeById(detailId);
+        List<String> propertyList = nodeService.findProperties(detailId);
         String name = node.getName();
         model.addAttribute("name",name);
         Map<String, String> labelList = new HashMap<>();
         Collection<Node> nodeList = nodeService.selectRelatedNodes(detailId);
         model.addAttribute("node",node);
         model.addAttribute("nodeList",nodeList);
+        model.addAttribute("propertyList",propertyList);
         return new ModelAndView("show_detail","model",model);
     }
 //    @RequestParam(value = "search_name") String search_name, Model model){
@@ -102,11 +126,21 @@ public class NodeController {
 //        return  new ModelAndView("show_result","model",model);
 //    }
 
-    @GetMapping("/findKidsById")
+
+    @GetMapping("/set_size")
     @ResponseBody
-    public Integer findKidsById(@RequestParam(value = "id",required = false)Long id){
-        return nodeService.numOfKids(id);
+    public void setSize(){
+        nodeService.setNodeSize();
     }
+
+    @RequestMapping(value = "/fabric")
+    public String toFabric(){return "fabric";}
+
+    @RequestMapping(value = "/login")
+    public String toLogin() {return "login";}
+
+    @RequestMapping(value = "/register")
+    public String toRegister() {return "register";}
 
     @RequestMapping(value = "/show_result")
     public String toBackshowall(){
@@ -128,6 +162,11 @@ public class NodeController {
         return "standards";
     }
 
+    @RequestMapping(value = "/colors")
+    public String colors(){
+        return "colors";
+    }
+
     @RequestMapping(value = "/iec62264-0")
     public String toIec62264_0(){
         return "iec62264";
@@ -146,6 +185,16 @@ public class NodeController {
     @RequestMapping(value = "/iec62264-3")
     public String toIec62264_3(){
         return "iec62264_3";
+    }
+
+    @RequestMapping(value = "/index3")
+    public String showIndex3(){
+        return "fabric";
+    }
+
+    @RequestMapping(value = "/ifashion")
+    public String showFishon(){
+        return "ifashon";
     }
 
     @RequestMapping(value = "/iec62264-4")
@@ -182,4 +231,15 @@ public class NodeController {
     public String toIndex(){
         return "index";
     }
+
+    @RequestMapping(value = "/test")
+    public String toTest(){
+        return "test";
+    }
+
+    @RequestMapping(value = "/recommend")
+    public String toRecommend(){
+        return "recommend";
+    }
+
 }

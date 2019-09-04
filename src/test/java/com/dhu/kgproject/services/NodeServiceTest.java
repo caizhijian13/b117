@@ -47,7 +47,8 @@ public class NodeServiceTest {
 
     @Test
     public void graphTest(){
-        Integer a = 2266;
+//        Integer a = 2266;
+        Integer a = 2494;
         Long b = a.longValue();
         System.out.println(nodeService.graph(b));
     }

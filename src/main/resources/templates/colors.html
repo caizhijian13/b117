@@ -1,0 +1,342 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title >穿戴推荐</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Classic Style Responsive web templates, Bootstrap Web Templates, Flat Web Templates, Android Compatible web templates,
+    Smartphone Compatible web templates, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+    function hideURLbar(){ window.scrollTo(0,1); }
+    </script>
+    <!-- //for-mobile-apps -->
+    <!--<link href="css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all"/>-->
+    <!--<link href="css/style.css" th:href="@{/css/style.css}"  rel="stylesheet" type="text/css" media="all"/>-->
+
+    <!-- //for-mobile-apps -->
+    <link href="css1/bootstrap.css" th:href="@{/css1/bootstrap.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css1/style.css" th:href="@{/css1/style.css}"  rel="stylesheet" type="text/css" media="all"/>
+    <!-- //animation-effect -->
+    <link href='https://fonts.googleapis.com/css?family=Cabin:400,500,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/css/bootstrap.css}" rel='stylesheet' type='text/css' />
+
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel='stylesheet' type='text/css' />
+    <!-- Custom CSS -->
+    <link th:href="@{/css2/style.css}" rel='stylesheet' type='text/css' />
+    <!-- font-awesome icons CSS -->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet">
+    <!-- //font-awesome icons CSS -->
+
+    <!-- side nav css file -->
+    <link th:href="@{/css/SidebarNav.min.css}"  media='all' rel='stylesheet' type='text/css'/>
+    <!-- side nav css file -->
+
+    <!-- js-->
+    <script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+
+    <!--webfonts-->
+    <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+    <!--//webfonts-->
+
+
+
+</head>
+
+<body>
+<!-- header -->
+<!-- //header -->
+<!-- header-starts -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">纺织服装知识图谱</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <div class="profile_details_left"><!--notifications of menu start -->
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <!--<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">-->
+                        <a href="/index">首页</a>
+                        <!--</button>-->
+                    </li>
+                    <li >
+                        <a href="/test" >穿戴搭配 </a>
+                    </li>
+                    <li >
+                        <a href="/colors" >潮流速递 </a>
+                    </li>
+                    <li >
+                        <a href="/fabric" >面料厂家 </a>
+                    </li>
+                </ul>
+                <!--<div class="clearfix"> </div>-->
+                <!--&lt;!&ndash;notification menu end &ndash;&gt;-->
+                <!--<div class="clearfix"> </div>-->
+            </div>
+            <div class="header-left" style="margin-left: 5%">
+
+                <!--search-box-->
+                <div class="row" style="margin-top: 1%">
+                    <form class="input" id="search_head" action="/search" method="post">
+                        <div class="col-md-8">
+                            <input class="sb-search-input input__field--madoka" name="search_name" placeholder="Search..." type="search" id="search" />
+                            <label class="input__label" for="search">
+                                <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
+                                    <path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
+                                </svg>
+                            </label>
+                        </div>
+                        <div class="col-md-4">
+                            <!--<span class="input-group-btn" >-->
+                            <button class="btn btn-default" type="submit" id = "bn1">搜索</button>
+                            <!--</span>-->
+                        </div>
+                    </form>
+                </div><!--//end-search-box-->
+
+
+                <!--<div class="clearfix"> </div>-->
+                <!--</div>-->
+                <!--<div class="clearfix"> </div>-->
+            </div>
+            <div class="profile_details_right">
+                <ul class="nav navbar-nav navbar-left">
+                    <li th:unless="${session.username}"><a href="/login">登录</a></li>
+                    <li th:unless="${session.username}"><a href="/register">注册</a></li>
+                    <li th:if="${session.username}" class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> [[${session.username}]] <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/logout">退出登录</a> </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- //header-ends -->
+<!-- Navigation -->
+<div class="container">
+    <a  href="/ifashion">预测颜色趋势</a>
+    <section>
+            <div style="text-align:center;font-weight:bold; margin-bottom:20px; margin-top:10px">2017年INTERCOLOR流行色定案（TPX）</div>
+                <ul class="lb-album" >
+                    <li>
+                        <a href="#image-1">
+                            <img src="/images/2017/13-0755.png" alt="image01">
+                            <span>13-0755</span>
+                        </a>
+                        <div class="lb-overlay" id="image-1">
+                            <a href="#page" class="lb-close">x Close</a>
+                            <img src="/images/2017/13-0755.png" alt="image01">
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#image-2">
+                            <img src="/images/2017/13-1404.png" alt="image02">
+                            <span>13-1404</span>
+                        </a>
+                        <div class="lb-overlay" id="image-2">
+                            <img src="/images/2017/13-1404.png" alt="image02">
+                            <a href="#page" class="lb-close">x Close</a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#image-3">
+                            <img src="/images/2017/14-1315.png" alt="image03">
+                            <span>14-1315</span>
+                        </a>
+                        <div class="lb-overlay" id="image-3">
+                            <img src="/images/2017/14-1315.png" alt="image03">
+                            <a href="#page" class="lb-close">x Close</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#image-4">
+                            <img src="/images/2017/14-4620.png" alt="image04">
+                            <span>14-4620</span>
+                        </a>
+                        <div class="lb-overlay" id="image-4">
+                            <img src="/images/2017/14-4620.png" alt="image04">
+                            <a href="#page" class="lb-close">x Close</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#image-5">
+                            <img src="/images/2017/15-0343.png" alt="image05">
+                            <span>15-0343</span>
+                        </a>
+                        <div class="lb-overlay" id="image-5">
+                            <img src="/images/2017/15-0343.png" alt="image05">
+                            <a href="#page" class="lb-close">x Close</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#image-6" >
+                            <img src="/images/2017/17-1462.png"   alt="image06">
+                            <span>17-1462</span>
+                        </a>
+                        <div class="lb-overlay" id="image-6">
+                            <img src="/images/2017/17-1462.png" alt="image06">
+                            <a href="#page" class="lb-close">x Close</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#image-7">
+                            <img src="/images/2017/17-2034.png" alt="image07">
+                            <span>17-2034</span>
+                        </a>
+                        <div class="lb-overlay" id="image-7">
+                            <img src="/images/2017/17-2034.png" alt="image07">
+                            <a href="#page" class="lb-close">x Close</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#image-8">
+                            <img src="/images/2017/17-4123.png" alt="image08">
+                            <span>17-4123</span>
+                        </a>
+                        <div class="lb-overlay" id="image-8">
+                            <img src="/images/2017/17-4123.png" alt="image08">
+                            <a href="#page" class="lb-close">x Close</a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#image-9">
+                            <img src="/images/2017/18-0107.png" alt="image09">
+                            <span>18-0107</span>
+                        </a>
+                        <div class="lb-overlay" id="image-9">
+                            <img src="/images/2017/18-0107.png" alt="image09">
+                            <a href="#page" class="lb-close">x Close</a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#image-10">
+                            <img src="/images/2017/19-4045.png" alt="image10">
+                            <span>19-4045</span>
+                        </a>
+                        <div class="lb-overlay" id="image-10">
+                            <img src="/images/2017/19-4045.png" alt="image10">
+                            <a href="#page" class="lb-close">x Close</a>
+                        </div>
+                    </li>
+
+                    <div class="clear"></div>
+                </ul>
+
+
+
+                <div style="text-align:center;font-weight:bold; margin-bottom:20px; margin-top:10px">2016年INTERCOLOR流行色定案（TPX）</div>
+                <ul class="lb-album" >
+                    <li>
+                        <a href="#image-11">
+                            <img src="/images/2016/12-0852.png" alt="image11">
+                            <span>12-0852</span>
+                        </a>
+                        <div class="lb-overlay" id="image-11">
+                            <a href="#page" class="lb-close">x Close</a>
+                            <img src="/images/2016/12-0852.png" alt="image11">
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#image-12">
+                            <img src="/images/2016/13-1520.png" alt="image12">
+                            <span>13-1520</span>
+                        </a>
+                        <div class="lb-overlay" id="image-12">
+                            <a href="#page" class="lb-close">x Close</a>
+                            <img src="/images/2016/13-1520.png" alt="image12">
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#image-13">
+                            <img src="/images/2016/15-0146.png" alt="image13">
+                            <span>15-0146</span>
+                        </a>
+                        <div class="lb-overlay" id="image-13">
+                            <a href="#page" class="lb-close">x Close</a>
+                            <img src="/images/2016/15-0146.png" alt="image13">
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#image-14">
+                            <img src="/images/2016/15-3919.png" alt="image14">
+                            <span>15-3919</span>
+                        </a>
+                        <div class="lb-overlay" id="image-14">
+                            <a href="#page" class="lb-close">x Close</a>
+                            <img src="/images/2016/15-3919.png" alt="image14">
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#image-15">
+                            <img src="/images/2016/16-3905.png" alt="image15">
+                            <span>16-3905</span>
+                        </a>
+                        <div class="lb-overlay" id="image-15">
+                            <a href="#page" class="lb-close">x Close</a>
+                            <img src="/images/2016/16-3905.png" alt="image15">
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#image-16">
+                            <img src="/images/2016/17-1514.png" alt="image16">
+                            <span>17-1514</span>
+                        </a>
+                        <div class="lb-overlay" id="image-16">
+                            <a href="#page" class="lb-close">x Close</a>
+                            <img src="/images/2016/17-1514.png" alt="image16">
+                        </div>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="/images/2016/19-4019.png" alt="image17">
+                            <span>19-4019</span>
+                        </a>
+                        <div class="lb-overlay" id="image-17">
+                            <a href="#page" class="lb-close">x Close</a>
+                            <img src="/images/2016/19-4019.png" alt="image17">
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#image-18">
+                            <img src="/images/2016/13-4810.png" alt="image18">
+                            <span>13-4810</span>
+                        </a>
+                        <div class="lb-overlay" id="image-18">
+                            <a href="#page" class="lb-close">x Close</a>
+                            <img src="/images/2016/13-4810.png" alt="image18">
+                        </div>
+                    </li>
+
+                    <div class="clear"></div>
+                </ul>
+
+            </section>
+        <div class="clear"></div>
+</div>
+
+
+</body>
+</html>

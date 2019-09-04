@@ -1,9 +1,8 @@
 package com.dhu.kgproject.domain;
 
 
-import org.neo4j.ogm.annotation.EndNode;
-import org.neo4j.ogm.annotation.RelationshipEntity;
-import org.neo4j.ogm.annotation.StartNode;
+import lombok.Data;
+import org.neo4j.ogm.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +10,10 @@ import java.util.List;
 @RelationshipEntity
 public abstract class Relationship {
 
+    @Id
     private Long id;
     private List<Relationship> relationships = new ArrayList<>();
+    private double relativity;
 
     @StartNode
     private Node startNode;
@@ -21,6 +22,14 @@ public abstract class Relationship {
     private Node endNode;
 
     public Relationship() {
+    }
+
+    public void setRelativity(double relativity) {
+        this.relativity = relativity;
+    }
+
+    public double getRelativity() {
+        return relativity;
     }
 
     public Relationship(Node startNode, Node endNode) {

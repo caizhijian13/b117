@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+    <script th:src="@{/js/echarts.min.js}"></script>
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/css/bootstrap.css}" rel='stylesheet' type='text/css' />
+
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel='stylesheet' type='text/css' />
+    <!-- font-awesome icons CSS -->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet">
+    <!-- //font-awesome icons CSS -->
+
+    <!-- side nav css file -->
+    <link th:href="@{/css/SidebarNav.min.css}"  media='all' rel='stylesheet' type='text/css'/>
+    <!-- side nav css file -->
+
+    <!-- js-->
+    <script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+    <script th:src="@{/js/modernizr.custom.js}"></script>
+
+    <!--webfonts-->
+    <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+    <!--//webfonts-->
+
+    <!-- Metis Menu -->
+    <script th:src="@{/js/metisMenu.min.js}"></script>
+    <script th:src="@{/js/custom.js}"></script>
+    <link href="/css/custom.css" rel="stylesheet">
+    <!--//Metis Menu -->
+
+</head>
+<style>
+    .text { font-size: 14px; pointer-events: none; }
+    .node { fill:#bee0fc; stroke: #bee0fc; stroke-width: 1px; }
+    .node.no1{fill:#483d8b;}
+    .node.no2{fill:#4169e1;}
+    .node.Instantiation{fill:#FFE4B5;}
+    .node.LFabric{fill:#FFE4B5;}
+    .node.Concept{fill:#20b2aa;}
+    .node.Color{fill:#20b2aa;}
+    .node.Detail{fill:#20b2aa;}
+    .node.Fabric{fill:#20b2aa;}
+    .node.Silhouette{fill:#20b2aa;}
+    .node.Style{fill:#20b2aa;}
+    .node.Trend{fill:#20b2aa;}
+    .node.Recommend{fill:#8fbc8f;}
+    .node.no6{fill:#7fffd4;}
+    .node.Design{fill:#F5FFFA;}
+    .node.Example{fill:#F5FFFA;}
+    .link { stroke: #999; stroke-opacity: .6; stroke-width: 3px; }
+    .link.fit { stroke: #cd201f; stroke-opacity: .6; stroke-width: 3px;}
+    .link.unfit {stroke: #00ad45; stroke-opacity: .6; stroke-width: 3px;}
+    a{text-decoration:none;}
+    a:hover{text-decoration:none; color:black;}
+    .img-responsive { display: block; height: auto; max-width: 90%; }
+</style>
+<body class="cbp-spmenu-push">
+<!-- header-starts -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">纺织服装知识图谱</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <div class="profile_details_left"><!--notifications of menu start -->
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <!--<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">-->
+                        <a href="/index">首页</a>
+                        <!--</button>-->
+                    </li>
+                    <li >
+                        <a href="/test" >穿戴搭配 </a>
+                    </li>
+                    <li >
+                        <a href="/colors" >潮流速递 </a>
+                    </li>
+                    <li >
+                        <a href="/fabric" >面料厂家 </a>
+                    </li>
+                </ul>
+                <!--<div class="clearfix"> </div>-->
+                <!--&lt;!&ndash;notification menu end &ndash;&gt;-->
+                <!--<div class="clearfix"> </div>-->
+            </div>
+            <div class="header-left" style="margin-left: 5%">
+
+                <!--search-box-->
+                <div class="row" style="margin-top: 1%">
+                    <form class="input" id="search_head" action="/search" method="post">
+                        <div class="col-md-8">
+                            <input class="sb-search-input input__field--madoka" name="search_name" placeholder="Search..." type="search" id="search" />
+                            <label class="input__label" for="search">
+                                <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
+                                    <path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
+                                </svg>
+                            </label>
+                        </div>
+                        <div class="col-md-4">
+                            <!--<span class="input-group-btn" >-->
+                            <button class="btn btn-default" type="submit" id = "bn1">搜索</button>
+                            <!--</span>-->
+                        </div>
+                    </form>
+                </div><!--//end-search-box-->
+
+
+                <!--<div class="clearfix"> </div>-->
+                <!--</div>-->
+                <!--<div class="clearfix"> </div>-->
+            </div>
+            <div class="profile_details_right">
+                <ul class="nav navbar-nav navbar-left">
+                    <li th:unless="${session.username}"><a href="/login">登录</a></li>
+                    <li th:unless="${session.username}"><a href="/register">注册</a></li>
+                    <li th:if="${session.username}" class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> [[${session.username}]] <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/logout">退出登录</a> </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- //header-ends -->
+<div class="col-md-12">
+
+    <div class="col-md-6" id="main" style="width: 500px;height:500px;">
+    </div>
+
+    <div class="col-md-6" id="main1" style="width: 500px;height:500px;">
+    </div>
+
+    <div class="col-md-6" id="main2" style="width: 500px;height:500px;">
+    </div>
+
+    <div class="col-md-6" id="main3" style="width: 500px;height:500px;">
+    </div>
+
+    <div class="col-md-6" id="main4" style="width: 500px;height:500px;">
+    </div>
+
+    <div class="col-md-6" id="main5" style="width: 500px;height:500px;">
+    </div>
+
+</div>
+
+<script>
+    var mychart = echarts.init(document.getElementById('main'));
+    var option={
+        calculable : true,
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:300, name:'14-1050'},
+                    {value:300, name:'14-0847'},
+                    {value:300, name:'11-0617'},
+                    {value:300, name:'13-0758'},
+                    {value:300, name:'14-0951'},
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    },
+                    normal:{
+                        color:function(params) {
+                            //自定义颜色
+                            var colorList = [
+                                '#FEAE51','#F2C471','#F6EDC3','#FFD31A','#E8AC32',
+                            ];
+                            return colorList[params.dataIndex]
+                        }
+                    }
+                }
+            }
+        ]
+    };
+    mychart.setOption(option);
+</script>
+
+<script>
+    var mychart = echarts.init(document.getElementById('main1'));
+    var option={
+        calculable : true,
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:300, name:'15-3507'},
+                    {value:300, name:'18-2929'},
+                    {value:300, name:'18-3540'},
+                    {value:300, name:'18-2333'},
+                    {value:300, name:'19-3540'}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    },
+                    normal:{
+                        color:function(params) {
+                            //自定义颜色
+                            var colorList = [
+                                '#BAA8C1','#8F3975','#76528B','#C7458B','#693B71',
+                            ];
+                            return colorList[params.dataIndex]
+                        }
+                    }
+                }
+            }
+        ]
+    };
+    mychart.setOption(option);
+</script>
+
+<script>
+    var mychart = echarts.init(document.getElementById('main2'));
+    var option={
+        calculable : true,
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:300, name:'16-1442'},
+                    {value:300, name:'17-1140'},
+                    {value:300, name:'16-1452'},
+                    {value:300, name:'16-1441'},
+                    {value:300, name:'15-1263'}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    },
+                    normal:{
+                        color:function(params) {
+                            //自定义颜色
+                            var colorList = [
+                                '#F6896A','#C66E33','#F36944','#D07157','#FF8927',
+                            ];
+                            return colorList[params.dataIndex]
+                        }
+                    }
+                }
+            }
+        ]
+    };
+    mychart.setOption(option);
+</script>
+
+<script>
+    var mychart = echarts.init(document.getElementById('main3'));
+    var option={
+        calculable : true,
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:300, name:'17-4245'},
+                    {value:300, name:'18-4726'},
+                    {value:300, name:'14-4311'},
+                    {value:300, name:'18-3932'},
+                    {value:300, name:'19-3713'}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    },
+                    normal:{
+                        color:function(params) {
+                            //自定义颜色
+                            var colorList = [
+                                '#277FBB','#257A88','#ADCFDF','#5B6487','#3E3C47',
+                            ];
+                            return colorList[params.dataIndex]
+                        }
+                    }
+                }
+            }
+        ]
+    };
+    mychart.setOption(option);
+</script>
+
+<script>
+    var mychart = echarts.init(document.getElementById('main4'));
+    var option={
+        calculable : true,
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:300, name:'16-3118'},
+                    {value:300, name:'13-2006'},
+                    {value:300, name:'16-1610'},
+                    {value:300, name:'14-1220'},
+                    {value:300, name:'16-1545'}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    },
+                    normal:{
+                        color:function(params) {
+                            //自定义颜色
+                            var colorList = [
+                                '#D88ABE','#F5BDC8','#CC8A92','#E7AF8F','#F7796D',
+                            ];
+                            return colorList[params.dataIndex]
+                        }
+                    }
+                }
+            }
+        ]
+    };
+    mychart.setOption(option);
+</script>
+
+<script>
+    var mychart = echarts.init(document.getElementById('main5'));
+    var option={
+        calculable : true,
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:300, name:'17-1563'},
+                    {value:300, name:'18-1653'},
+                    {value:300, name:'19-1337'},
+                    {value:300, name:'17-1449'},
+                    {value:300, name:'19-1763'}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    },
+                    normal:{
+                        color:function(params) {
+                            //自定义颜色
+                            var colorList = [
+                                '#cc0601','#BA2B42','#753D3C','#C04E38','#BC2E3E',
+                            ];
+                            return colorList[params.dataIndex]
+                        }
+                    }
+                }
+            }
+        ]
+    };
+    mychart.setOption(option);
+</script>
+</body>
+</html>
