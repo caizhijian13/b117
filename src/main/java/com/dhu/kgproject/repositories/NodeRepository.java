@@ -7,11 +7,13 @@ import org.neo4j.cypher.internal.frontend.v2_3.ast.functions.Str;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface NodeRepository extends Neo4jRepository<Node,Long> {
 
 //    Node findNodeByName(@Param("name") String name);
