@@ -83,6 +83,15 @@ public class NodeRepositoryTest {
     }
 
     @Test
+    public void indexTest(){
+        Long a = Long.valueOf(2266);
+        Collection<Node> nodes = repository.graph(a);
+        for (Node node: nodes){
+            System.out.println(node);
+        }
+    }
+
+    @Test
     public void selectGIdTest(){
         Integer a = 1699;
         Long b = a.longValue();

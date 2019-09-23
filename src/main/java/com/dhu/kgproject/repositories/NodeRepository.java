@@ -36,7 +36,7 @@ public interface NodeRepository extends Neo4jRepository<Node,Long> {
     Collection<Node> selectgraph(@Param("name") String name);
 
     @Query("MATCH (n)-[r*1..2]-(m) where id(n)={id} RETURN n,r,m")
-    Collection<Node> graph(@Param("id") Long id);
+        Collection<Node> graph(@Param("id") Long id);
 
     @Query("MATCH (n)-[s]-(m) WHERE id(n)={id} RETURN n,s,m")
     Collection<Node> selectGraphById(@Param("id") Long id);
