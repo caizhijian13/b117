@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="page-head-link">
-<title>工业4.0相关标准</title>
+<title>智能制造相关标准</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
@@ -37,100 +37,13 @@
 </head> 
 <body class="cbp-spmenu-push">
 	<div class="main-content">
-	<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+
 		<!--left-fixed -navigation-->
-		<aside class="sidebar-left">
-      <nav class="navbar navbar-inverse">
-          <div class="navbar-header" >
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".collapse" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            </button>
-            <h1><a class="navbar-brand" href="#"><span class="fa fa-area-chart"></span> KG<span class="dashboard_text">工业4.0相关标准</span></a></h1>
-          </div>
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-            <ul class="sidebar-menu">
-          
-			  <li class="treeview">
-                <a href="#">
-                <i class="fa fa-laptop"></i>
-                <span>IEC62264 企业控制系统集成</span>
-                <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                  <li><a href="/iec62264-0"><i class="fa fa-angle-right"></i> 概述</a></li>
-                  <li><a href="/iec62264-1"><i class="fa fa-angle-right"></i> 第一部分</a></li>
-				  <li><a href="/iec62264-2"><i class="fa fa-angle-right"></i> 第二部分</a></li>
-				  <li><a href="/iec62264-3"><i class="fa fa-angle-right"></i> 第三部分</a></li>
-				  <li><a href="/iec62264-4"><i class="fa fa-angle-right"></i> 第四部分</a></li>
-				  <li><a href="/iec62264-5"><i class="fa fa-angle-right"></i> 第五部分</a></li>
-                </ul>
-              </li>
-			  
-			   <li class="treeview">
-                <a href="#">
-                <i class="fa fa-laptop"></i>
-                <span>IEC62443 工业通信网络网络和系统安全</span>
-                <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                  <li><a href="/iec62443-0"><i class="fa fa-angle-right"></i> 概述</a></li>
-                  <li><a href="/iec62443-1"><i class="fa fa-angle-right"></i> 第一部分</a></li>
-					<li><a href="/iec62443-2"><i class="fa fa-angle-right"></i> 第二部分</a></li>
-					<li><a href="/iec62443-3"><i class="fa fa-angle-right"></i> 第三部分</a></li>
-					<li><a href="/iec62443-4"><i class="fa fa-angle-right"></i> 第四部分</a></li>
-                </ul>
-              </li>
-			  		  	  
-			   <li class="treeview">
-                <a href="#">
-                <i class="fa fa-laptop"></i>
-                <span>IEC61158 工业通信网络现场总线规范</span>
-                <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-					<li><a href="/iec61158-0"><i class="fa fa-angle-right"></i> 概述</a></li>
-                  <li><a href="/iec61158-1"><i class="fa fa-angle-right"></i> 第一部分</a></li>
-                  <li><a href="/iec61158-2"><i class="fa fa-angle-right"></i> 第二部分</a></li>
-					<li><a href="/iec61158-3"><i class="fa fa-angle-right"></i> 第三部分</a></li>
-					<li><a href="/iec61158-4"><i class="fa fa-angle-right"></i> 第四部分</a></li>
-					<li><a href="/iec61158-5"><i class="fa fa-angle-right"></i> 第五部分</a></li>
-					<li><a href="/iec61158-6"><i class="fa fa-angle-right"></i> 第六部分</a></li>
-                </ul>
-              </li>
-				<li class="treeview">
-					<a href="#">
-						<i class="fa fa-laptop"></i>
-						<span>IEC62453 现场设备工具（FDT）接口规范</span>
-						<i class="fa fa-angle-left pull-right"></i>
-					</a>
-					<ul class="treeview-menu">
-						<li><a href="/iec62453-0"><i class="fa fa-angle-right"></i> 概述</a></li>
-						<li><a href="/iec62453-1"><i class="fa fa-angle-right"></i> 第一部分</a></li>
-						<li><a href="/iec62453-2"><i class="fa fa-angle-right"></i> 第二部分</a></li>
-						<li><a href="/iec62453-3"><i class="fa fa-angle-right"></i> 第三部分</a></li>
-						<li><a href="/iec62453-4"><i class="fa fa-angle-right"></i> 第四部分</a></li>
-						<li><a href="/iec62453-5"><i class="fa fa-angle-right"></i> 第五部分</a></li>
-						<li><a href="/iec62453-6"><i class="fa fa-angle-right"></i> 第六部分</a></li>
-					</ul>
-				</li>
-			  
-			  
-			  
-            </ul>
-          </div>
-          <!-- /.navbar-collapse -->
-      </nav>
-    </aside>
-	</div>
-		<!--left-fixed -navigation-->
-		
+		<div th:replace="header::stan_left"></div>
 		<!-- header-starts -->
 				<div class="sticky-header header-section ">
 			<div class="header-left">
-				
+
 				<!--toggle button start-->
 				<button id="showLeftPush"><i class="fa fa-bars"></i></button>
 				<!--toggle button end-->
@@ -139,7 +52,7 @@
 						<li class="dropdown head-dpdn">
 							<!--<a href="/common" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">首页</a>-->
 							<a href="/index">首页</a>
-						</li>	
+						</li>
 					</ul>
 					<div class="clearfix"> </div>
 				</div>
@@ -147,24 +60,24 @@
 				<div class="clearfix"> </div>
 			</div>
 			<div class="header-right">
-				
-				
-				<!--search-box-->
-				<div class="search-box">
-					<form class="input">
-						<input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
-						<label class="input__label" for="input-31">
-							<svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
-								<path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
-							</svg>
-						</label>
-					</form>
-				</div><!--//end-search-box-->
-				
-				
-				<div class="clearfix"> </div>				
+
+
+				<!--&lt;!&ndash;search-box&ndash;&gt;-->
+				<!--<div class="search-box">-->
+					<!--<form class="input">-->
+						<!--<input class="sb-search-input input__field&#45;&#45;madoka" placeholder="Search..." type="search" id="input-31" />-->
+						<!--<label class="input__label" for="input-31">-->
+							<!--<svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">-->
+								<!--<path d="m0,0l404,0l0,77l-404,0l0,-77z"/>-->
+							<!--</svg>-->
+						<!--</label>-->
+					<!--</form>-->
+				<!--</div>&lt;!&ndash;//end-search-box&ndash;&gt;-->
+
+
+				<div class="clearfix"> </div>
 			</div>
-			<div class="clearfix"> </div>	
+			<div class="clearfix"> </div>
 		</div>
 		<!-- //header-ends -->
 		<!-- //header-ends -->
@@ -174,7 +87,7 @@
 	
 				
 				<table class="emtidy-9" border="0" cellspacing="0" cellpadding="0" width="750" style="text-align: center; margin-left:20%">
-<tbody>
+				<tbody>
 <tr class="firstRow">
 <td width="748" align="right">
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -191,16 +104,18 @@
 			<tr>
 				<td bgcolor="#fefaf1" height="77" style="text-align: left; padding-bottom: 10px; margin: 0px; padding-left: 10px; padding-right: 10px; padding-top: 10px" valign="top">
 				<p></p><p></p>
-					<p><strong><a href="#" target="_blank">工业4.0相关标准</a></strong></p>
-					<p><strong>内容提要：</strong> 德国工业影响力的一个侧面就是“标准化”。工业4.0工作组认为，推行工业4.0需要在8个关键领域采取行动。其中第一个领域就是“标准化和参考架构”。标准化工作主要围绕智能工厂生态链上各个环节制定合作机制，确定哪些信息可被用来交换。为此，工业4.0将制定一揽子共同标准，使合作机制成为可能，并通过一系列标准(如成本、可用性和资源消耗)对生产流程进行优化。</br>
-						以往，我们听到的大多数是“产品的标准化”，而“工业4.0”将进一步推广“工厂的标准化”，借助智能工厂的标准化将制造业生产规模推广到国际市场，以标准化提高技术创新和模式创新的市场化效率，继续保持德国工业的世界领先地位
+					<p><strong><a href="#" target="_blank">智能制造</a></strong></p>
+					<br><strong>内容提要：</strong> 智能制造技术是指在制造工业的各个环节，以一种高度柔性与高度集成的方式，通过计算机来模拟人类专家的制造智能活动。因此，智能制造的研究开发对象是整个机械制造企业，其主要研究开发目标有二：</br>
+						（1）整个制造工作的全面智能化，它在实际制造系统中首次提出了以机器智能取代人的部分脑力劳动作为主要目标，强调整个企业生产经营过程大范围的自组织能力；</br>
+						（2）信息和制造智能的集成与共享，强调智能型的集成自动化。</br>
 					</p><p>&nbsp;</p>
-					
 
-				
+
+
 
 				</td></tr></tbody></table></td></tr>
-<tr><td><br /></td></tr></tbody></table></div></div><div style="text-align: center;"><br /></div><font face="Arial"><div style="text-align: center;"><span style="line-height: 1.7;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></div></font></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div><br /><span title="neteasefooter"><p>&nbsp;</p></span></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div> 
+<tr><td><br /></td></tr></tbody></table>
+			</div></div><div style="text-align: center;"><br /></div><font face="Arial"><div style="text-align: center;"><span style="line-height: 1.7;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></div></font></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div><br /><span title="neteasefooter"><p>&nbsp;</p></span></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div>
 
 				<style type="text/css">
 body{font-size:14px;font-family:arial,verdana,sans-serif;line-height:1.666;padding:0;margin:0;overflow:auto;white-space:normal;word-wrap:break-word;min-height:100px}
@@ -210,7 +125,7 @@ th,td{font-family:arial,verdana,sans-serif;line-height:1.666}
 img{ border:0}
 header,footer,section,aside,article,nav,hgroup,figure,figcaption{display:block}
 </style>
-							
+
 			</div>
 		</div>
 

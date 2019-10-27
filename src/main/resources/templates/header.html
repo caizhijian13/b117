@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>头部导航</title>
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/css/bootstrap.css}" rel='stylesheet' type='text/css' />
+
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel='stylesheet' type='text/css' />
+    <!-- font-awesome icons CSS -->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet">
+    <!-- //font-awesome icons CSS -->
+
+    <!-- side nav css file -->
+    <link th:href="@{/css/SidebarNav.min.css}"  media='all' rel='stylesheet' type='text/css'/>
+    <!-- side nav css file -->
+
+    <!-- js-->
+    <script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+    <script th:src="@{/js/modernizr.custom.js}"></script>
+
+    <!--webfonts-->
+    <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+    <!--//webfonts-->
+
+    <!-- Metis Menu -->
+    <script th:src="@{/js/metisMenu.min.js}"></script>
+    <script th:src="@{/js/custom.js}"></script>
+    <link href="/css/custom.css" rel="stylesheet">
+    <!--//Metis Menu -->
+</head>
+<body>
+<div th:fragment="header">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">纺织服装知识图谱</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <div class="profile_details_left"><!--notifications of menu start -->
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <!--<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">-->
+                            <a href="/index">首页</a>
+                            <!--</button>-->
+                        </li>
+                        <li >
+                            <a href="/test" >穿戴搭配 </a>
+                        </li>
+                        <li >
+                            <a href="/colors" >潮流速递 </a>
+                        </li>
+                        <li >
+                            <a href="/fabric" >面料厂家 </a>
+                        </li>
+                    </ul>
+                    <!--<div class="clearfix"> </div>-->
+                    <!--&lt;!&ndash;notification menu end &ndash;&gt;-->
+                    <!--<div class="clearfix"> </div>-->
+                </div>
+                <div class="header-left" style="margin-left: 5%">
+
+                    <!--search-box-->
+                    <div class="row" style="margin-top: 1%">
+                        <form class="input" id="search_head" action="/search" method="post">
+                            <div class="col-md-8">
+                                <input class="sb-search-input input__field--madoka" name="search_name" placeholder="Search..." type="search" id="search" />
+                                <label class="input__label" for="search">
+                                    <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
+                                        <path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
+                                    </svg>
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                <!--<span class="input-group-btn" >-->
+                                <button class="btn btn-default" type="submit" id = "bn1">搜索</button>
+                                <!--</span>-->
+                            </div>
+                        </form>
+                    </div><!--//end-search-box-->
+
+
+                    <!--<div class="clearfix"> </div>-->
+                    <!--</div>-->
+                    <!--<div class="clearfix"> </div>-->
+                </div>
+                <div class="profile_details_right">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li th:unless="${session.username}"><a href="/login">登录</a></li>
+                        <li th:unless="${session.username}"><a href="/register">注册</a></li>
+                        <li th:if="${session.username}" class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> [[${session.username}]] <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/logout">退出登录</a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- //header-ends -->
+
+<!--左侧导航栏 -->
+<div class="col-md-3 text-center" th:fragment="left_nav">
+    <!--<h3 >流行趋势版块</h3>-->
+    <!--<img style="width: 100%" src="../static/images/index1.png"/>-->
+    <div class="btn-group " role="group" aria-label="...">
+        <!--<button type="button" class="btn btn-default">色彩</button>-->
+        <!--<button type="button" class="btn btn-default">风格</button>-->
+        <!--<button type="button" class="btn btn-default">细节</button>-->
+        <!--<button type="button" class="btn btn-default">廓形</button>-->
+        <!--<button type="button" class="btn btn-default">面料</button>-->
+        <ul class="sidebar-menu" >
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-laptop"></i>
+                    <span>流行趋势</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <!--<li><a href="http://10.199.157.176:8080/concept.html?name=流行趋势">概念层</a></li>-->
+                    <li><a href="/searchById?detailId=1558">色彩</a></li>
+                    <li><a href="/searchById?detailId=1570">风格</a></li>
+                    <li><a href="/searchById?detailId=1561">细节</a></li>
+                    <li><a href="/searchById?detailId=1475">廓形</a></li>
+                    <li><a href="/searchById?detailId=1504">面料</a></li>
+                </ul>
+            </li>
+
+
+            <li class="treeview">
+                <a href="/search?search_name=面料">
+                    <i class="fa fa-laptop"></i>
+                    <span>面辅料知识</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="http://10.199.157.176:5000/?id=656">
+                            <i class="fa fa-laptop"></i>
+                            <span>面料</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/searchById?detailId=658"><i class="fa fa-angle-right"></i> 毛</a></li>
+                            <li><a href="/searchById?detailId=659"><i class="fa fa-angle-right"></i> 丝</a></li>
+                            <li><a href="/searchById?detailId=209"><i class="fa fa-angle-right"></i> 棉</a></li>
+                            <li><a href="/searchById?detailId=661"><i class="fa fa-angle-right"></i> 麻</a></li>
+                            <li><a href="/searchById?detailId=662"><i class="fa fa-angle-right"></i> 仿麻</a></li>
+                            <li><a href="/searchById?detailId=660"><i class="fa fa-angle-right"></i> 仿丝</a></li>
+                            <li><a href="/searchById?detailId=370"><i class="fa fa-angle-right"></i> 针织物</a></li>
+                            <li><a href="/searchById?detailId=944"><i class="fa fa-angle-right"></i> 坯布</a></li>
+                            <li><a href="/searchById?detailId=743"><i class="fa fa-angle-right"></i> 混纺、交织物</a></li>
+                            <li><a href="/searchById?detailId=376"><i class="fa fa-angle-right"></i> 化纤织物</a></li>
+                            <li><a href="/searchById?detailId=519"><i class="fa fa-angle-right"></i> 色织、提花、印花布</a></li>
+                            <li><a href="/searchById?detailId=210"><i class="fa fa-angle-right"></i> 新型纺织材料</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="/searchById?detailId=657">
+                            <i class="fa fa-laptop"></i>
+                            <span>辅料</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/searchById?detailId=212"><i class="fa fa-angle-right"></i> 花边</a></li>
+                            <li><a href="/searchById?detailId=211"><i class="fa fa-angle-right"></i> 纽扣</a></li>
+                            <li><a href="/searchById?detailId=216"><i class="fa fa-angle-right"></i> 衬布、垫</a></li>
+                            <li><a href="/searchById?detailId=213"><i class="fa fa-angle-right"></i> 带、绳、线</a></li>
+                            <li><a href="/searchById?detailId=214"><i class="fa fa-angle-right"></i> 洗唛、商标、挂牌</a></li>
+                            <li><a href="/searchById?detailId=215"><i class="fa fa-angle-right"></i> 拉链、拉头</a></li>
+                            <li><a href="/searchById?detailId=217"><i class="fa fa-angle-right"></i> 其他辅料</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="/search?search_name=服装设计">
+                    <i class="fa fa-laptop"></i>
+                    <span>服装设计知识</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="/searchById?detailId=1702">
+                            <i class="fa fa-laptop"></i>
+                            <span>服装款式设计</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/searchById?detailId=1697">服装造型设计</a></li>
+                            <li><a href="/searchById?detailId=1698">服装色彩设计</a></li>
+                            <li><a href="/searchById?detailId=1699">服装面料设计</a></li>
+                            <li><a href="/searchById?detailId=1696">服装整体风格</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="/searchById?detailId=1704">
+                            <i class="fa fa-laptop"></i>
+                            <span>服装工艺设计</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="/searchById?detailId=1703">
+                            <i class="fa fa-laptop"></i>
+                            <span>服装制版设计</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+
+                    </li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="/search?search_name=相关技术">
+                    <i class="fa fa-laptop"></i>
+                    <span>智能制造</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="/search?search_name=相关技术">
+                            <i class="fa fa-laptop"></i>
+                            <span>相关技术</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/search?search_name=人工智能"><i class="fa fa-angle-right"></i> 人工智能</a></li>
+                            <li><a href="/search?search_name=CPS嵌入式系统"><i class="fa fa-angle-right"></i> CPS嵌入式系统</a></li>
+                            <li><a href="/search?search_name=信息安全"><i class="fa fa-angle-right"></i> 信息安全</a></li>
+                            <li><a href="/search?search_name=云计算"><i class="fa fa-angle-right"></i> 云计算</a></li>
+                            <li><a href="/search?search_name=网络技术"><i class="fa fa-angle-right"></i> 网络技术</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="/search?search_name=工业4.0">
+                            <i class="fa fa-laptop"></i>
+                            <span>德国工业4.0</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/search?search_name=相关标准"><i class="fa fa-angle-right"></i> 相关标准</a></li>
+                            <li><a href="/search?search_name=参考体系"><i class="fa fa-angle-right"></i> 参考体系</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="/search?search_name=中国制造2025">
+                            <i class="fa fa-laptop"></i>
+                            <span>中国制造2025</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/search?search_name=相关标准"><i class="fa fa-angle-right"></i> 相关标准</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="/search?search_name=日本工业价值链计划">
+                            <i class="fa fa-laptop"></i>
+                            <span>日本工业价值链计划</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/search?search_name=相关标准"><i class="fa fa-angle-right"></i> 相关标准</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="/search?search_name=智慧工厂">
+                            <i class="fa fa-laptop"></i>
+                            <span>智慧工厂</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/search?search_name=智能仓储">智能仓储</a></li>
+                            <li><a href="/search?search_name=智能车间">智能车间</a></li>
+                            <li><a href="/search?search_name=智能品质管理">智能品质管理</a></li>
+                            <li><a href="/search?search_name=集成ERP系统">集成ERP系统</a></li>
+                            <li><a href="/search?search_name=集成MES系统">集成MES系统</a></li>
+                            <li><a href="/search?search_name=追溯管理">追溯管理</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="/search?search_name=智能生产">
+                            <i class="fa fa-laptop"></i>
+                            <span>智能生产</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/search?search_name=石油石化智能成套设备">石油石化智能成套设备</a></li>
+                            <li><a href="/search?search_name=冶金智能成套设备">冶金智能成套设备</a></li>
+                            <li><a href="/search?search_name=智能化成形和加工成套设备">智能化成形和加工成套设备</a></li>
+                            <li><a href="/search?search_name=自动化物流成套设备">自动化物流成套设备</a></li>
+                            <li><a href="/search?search_name=建材制造成套设备">建材制造成套设备</a></li>
+                            <li><a href="/search?search_name=智能化食品制造生产线">智能化食品制造生产线</a></li>
+                            <li><a href="/search?search_name=智能化纺织成套装备">智能化纺织成套装备</a></li>
+                            <li><a href="/search?search_name=智能化印刷装备">智能化印刷装备</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="/search?search_name=穿搭知识">
+                    <i class="fa fa-laptop"></i>
+                    <span>穿搭知识</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="/search?search_name=服装特征">
+                            <i class="fa fa-laptop"></i>
+                            <span>服装特征</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/searchById?detailId=2279"><i class="fa fa-angle-right"></i> 款式</a></li>
+                            <li><a href="/searchById?detailId=2280"><i class="fa fa-angle-right"></i> 材质</a></li>
+                            <li><a href="/searchById?detailId=2277"><i class="fa fa-angle-right"></i> 领型</a></li>
+                            <li><a href="/searchById?detailId=2278"><i class="fa fa-angle-right"></i> 颜色</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="/search?search_name=人体特征">
+                            <i class="fa fa-laptop"></i>
+                            <span>人体特征</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/searchById?detailId=2272"><i class="fa fa-angle-right"></i> 脸型</a></li>
+                            <li><a href="/searchById?detailId=2276"><i class="fa fa-angle-right"></i> 发型</a></li>
+                            <li><a href="/searchById?detailId=2273"><i class="fa fa-angle-right"></i> 身材</a></li>
+                            <li><a href="/searchById?detailId=2274"><i class="fa fa-angle-right"></i> 肤色</a></li>
+                            <li><a href="/searchById?detailId=2275"><i class="fa fa-angle-right"></i> 缺点</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/searchById?detailId=2271"><i class="fa fa-angle-right"></i> 风格</a></li>
+                    <li><a href="/searchById?detailId=2270"><i class="fa fa-angle-right"></i> 配饰</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--标准页公共部分 -->
+<div th:fragment="stan_left" class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+    <!--left-fixed -navigation-->
+    <aside class="sidebar-left">
+        <nav class="navbar navbar-inverse">
+            <div class="navbar-header" >
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h1><a class="navbar-brand" href="#"><span style="font-size: 20px" class="fa fa-area-chart">智能制造相关标准</span></a></h1>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+                <ul class="sidebar-menu">
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>中国制造2025</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/china"><i class="fa fa-angle-right"></i> 概述</a></li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-angle-right"></i>
+                                    <span>相关标准</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="china_stan"><i class="fa fa-laptop"></i>国家智能制造标准体系建设指南</a></li>
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="fa fa-laptop"></i>
+                                            <span>IEC62453 现场设备工具（FDT）接口规范</span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            <li><a href="/iec62453-0"><i class="fa fa-angle-right"></i> 概述</a></li>
+                                            <li><a href="/iec62453-1"><i class="fa fa-angle-right"></i> 第一部分</a></li>
+                                            <li><a href="/iec62453-2"><i class="fa fa-angle-right"></i> 第二部分</a></li>
+                                            <li><a href="/iec62453-3"><i class="fa fa-angle-right"></i> 第三部分</a></li>
+                                            <li><a href="/iec62453-4"><i class="fa fa-angle-right"></i> 第四部分</a></li>
+                                            <li><a href="/iec62453-5"><i class="fa fa-angle-right"></i> 第五部分</a></li>
+                                            <li><a href="/iec62453-6"><i class="fa fa-angle-right"></i> 第六部分</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>德国工业4.0</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/germany"><i class="fa fa-angle-right"></i> 概述</a></li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-angle-right"></i>
+                                    <span>相关标准</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="fa fa-laptop"></i>
+                                            <span>IEC62264 企业控制系统集成</span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            <li><a href="/iec62264-0"><i class="fa fa-angle-right"></i> 概述</a></li>
+                                            <li><a href="/iec62264-1"><i class="fa fa-angle-right"></i> 第一部分</a></li>
+                                            <li><a href="/iec62264-2"><i class="fa fa-angle-right"></i> 第二部分</a></li>
+                                            <li><a href="/iec62264-3"><i class="fa fa-angle-right"></i> 第三部分</a></li>
+                                            <li><a href="/iec62264-4"><i class="fa fa-angle-right"></i> 第四部分</a></li>
+                                            <li><a href="/iec62264-5"><i class="fa fa-angle-right"></i> 第五部分</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="fa fa-laptop"></i>
+                                            <span>IEC62443 工业通信网络网络和系统安全</span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            <li><a href="/iec62443-0"><i class="fa fa-angle-right"></i> 概述</a></li>
+                                            <li><a href="/iec62443-1"><i class="fa fa-angle-right"></i> 第一部分</a></li>
+                                            <li><a href="/iec62443-2"><i class="fa fa-angle-right"></i> 第二部分</a></li>
+                                            <li><a href="/iec62443-3"><i class="fa fa-angle-right"></i> 第三部分</a></li>
+                                            <li><a href="/iec62443-4"><i class="fa fa-angle-right"></i> 第四部分</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="fa fa-laptop"></i>
+                                            <span>IEC61158 工业通信网络现场总线规范</span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            <li><a href="/iec61158-0"><i class="fa fa-angle-right"></i> 概述</a></li>
+                                            <li><a href="/iec61158-1"><i class="fa fa-angle-right"></i> 第一部分</a></li>
+                                            <li><a href="/iec61158-2"><i class="fa fa-angle-right"></i> 第二部分</a></li>
+                                            <li><a href="/iec61158-3"><i class="fa fa-angle-right"></i> 第三部分</a></li>
+                                            <li><a href="/iec61158-4"><i class="fa fa-angle-right"></i> 第四部分</a></li>
+                                            <li><a href="/iec61158-5"><i class="fa fa-angle-right"></i> 第五部分</a></li>
+                                            <li><a href="/iec61158-6"><i class="fa fa-angle-right"></i> 第六部分</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>日本工业价值链计划</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/japan"><i class="fa fa-angle-right"></i> 概述</a></li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-angle-right"></i>
+                                    <span>相关标准</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="/japan_stan"><i class="fa fa-laptop"></i>日本工业价值链参考架构</a></li>
+                                </ul>
+                        </ul>
+                    </li>
+
+
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+    </aside>
+    <!-- 标准页头部-->
+    <div class="sticky-header header-section ">
+        <div class="header-left">
+
+            <!--toggle button start-->
+            <button id="showLeftPush"><i class="fa fa-bars"></i></button>
+            <!--toggle button end-->
+            <div class="profile_details_left"><!--notifications of menu start -->
+                <ul class="nofitications-dropdown">
+                    <li class="dropdown head-dpdn">
+                        <!--<a href="/common" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">首页</a>-->
+                        <a href="/index">首页</a>
+                    </li>
+                </ul>
+                <div class="clearfix"> </div>
+            </div>
+            <!--notification menu end -->
+            <div class="clearfix"> </div>
+        </div>
+        <div class="header-right">
+
+
+            <!--&lt;!&ndash;search-box&ndash;&gt;-->
+            <!--<div class="search-box">-->
+            <!--<form class="input">-->
+            <!--<input class="sb-search-input input__field&#45;&#45;madoka" placeholder="Search..." type="search" id="input-31" />-->
+            <!--<label class="input__label" for="input-31">-->
+            <!--<svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">-->
+            <!--<path d="m0,0l404,0l0,77l-404,0l0,-77z"/>-->
+            <!--</svg>-->
+            <!--</label>-->
+            <!--</form>-->
+            <!--</div>&lt;!&ndash;//end-search-box&ndash;&gt;-->
+
+
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+</body>
+</html>

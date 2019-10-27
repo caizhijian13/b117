@@ -133,6 +133,9 @@ public class NodeController {
         nodeService.setNodeSize();
     }
 
+    @GetMapping(value = "/header")
+    public String header(){return "header";}
+
     @RequestMapping(value = "/fabric")
     public String toFabric(){return "fabric";}
 
@@ -162,10 +165,25 @@ public class NodeController {
         return "standards";
     }
 
+    @RequestMapping(value = "/china")
+    public String toChina(){return "china";}
+
+    @RequestMapping(value = "/germany")
+    public String toGermany(){return "germany";}
+
+    @RequestMapping(value = "/japan")
+    public String toJapan(){return "japan";}
+
     @RequestMapping(value = "/colors")
     public String colors(){
         return "colors";
     }
+
+    @RequestMapping(value = "/china_stan")
+    public String chinaStan(){return "china_stan";}
+
+    @RequestMapping(value = "/japan_stan")
+    public String japanStan(){return "japan_stan";}
 
     @RequestMapping(value = "/iec62264-0")
     public String toIec62264_0(){

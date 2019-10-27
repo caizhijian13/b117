@@ -1,45 +1,49 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="page-head-link">
-    <title>工业4.0相关标准</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<head>
+    <meta charset="UTF-8">
+    <title>日本工业价值链参考架构</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
-    <!-- Bootstrap Core CSS -->
-    <link th:href="@{/css/bootstrap.css}" rel='stylesheet' type='text/css' />
+<!-- Bootstrap Core CSS -->
+<link th:href="@{/css/bootstrap.css}" rel='stylesheet' type='text/css' />
 
-    <!-- Custom CSS -->
-    <link th:href="@{/css/style.css}" rel='stylesheet' type='text/css' />
-    <!-- font-awesome icons CSS -->
-    <link th:href="@{/css/font-awesome.css}" rel="stylesheet">
-    <!-- //font-awesome icons CSS -->
+<!-- Custom CSS -->
+<link th:href="@{/css/style.css}" rel='stylesheet' type='text/css' />
+<!-- font-awesome icons CSS -->
+<link th:href="@{/css/font-awesome.css}" rel="stylesheet">
+<!-- //font-awesome icons CSS -->
 
-    <!-- side nav css file -->
-    <link th:href="@{/css/SidebarNav.min.css}"  media='all' rel='stylesheet' type='text/css'/>
-    <!-- side nav css file -->
+<!-- side nav css file -->
+<link th:href="@{/css/SidebarNav.min.css}"  media='all' rel='stylesheet' type='text/css'/>
+<!-- side nav css file -->
 
-    <!-- js-->
-    <script th:src="@{/js/jquery-1.11.1.min.js}"></script>
-    <script th:src="@{/js/modernizr.custom.js}"></script>
+<!-- js-->
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+<script th:src="@{/js/modernizr.custom.js}"></script>
 
-    <!--webfonts-->
-    <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
-    <!--//webfonts-->
+<!--webfonts-->
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+<!--//webfonts-->
 
-    <!-- Metis Menu -->
-    <script th:src="@{/js/metisMenu.min.js}"></script>
-    <script th:src="@{/js/custom.js}"></script>
-    <link href="/css/custom.css" rel="stylesheet">
-    <!--//Metis Menu -->
-
+<!-- Metis Menu -->
+<script th:src="@{/js/metisMenu.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+<link href="/css/custom.css" rel="stylesheet">
+<!--//Metis Menu -->
 </head>
 <body class="cbp-spmenu-push">
 <div class="main-content">
+
     <!--left-fixed -navigation-->
     <div th:replace="header::stan_left"></div>
     <!-- header-starts -->
+    <!-- //header-ends -->
     <!-- //header-ends -->
     <!-- main content start-->
     <div id="page-wrapper">
@@ -64,17 +68,13 @@
                                         <tr>
                                             <td bgcolor="#fefaf1" height="77" style="text-align: left; padding-bottom: 10px; margin: 0px; padding-left: 10px; padding-right: 10px; padding-top: 10px" valign="top">
                                                 <p></p><p></p>
-                                                <p><strong><a href="http://research.dhu.edu.cn/bf/77/c6973a180087/page.htm" target="_blank">IEC62453 现场设备工具（FDT）接口规范</a></strong></p>
-                                                <p><strong>标准整体情况：</br></strong> IEC 62453系列现有9个标准和9个技术报告，本文简要介绍这些标准和技术报告的内容。IEC 62453是一个不断发展的系列，标准和技术报告的内容今后还会增加。</br>
-                                                    IEC 62453提供了一个接口规范，用于开发FDT（现场设备工具）组件，在一个客户机/服务器架构中，支持功能控制和数据访问。这个标准接口的可用性使得多个制造商开发服务器和客户机应用非常便利，并且支持开放的互操作。一个设备或者模块特定的软件组件，被称为一个DTM（设备类型管理器），是由某个制造商提供的、具有相关设备类型或者实体类型的信息。每个DTM通过定义的FDT接口可以集成到工程工具中。这种集成方法通常对所有的现场总线开放，因此可以把不同设备和软件模块集成到控制系统中。</br>
-                                                    IEC 62453公共应用接口为有兴趣的应用开发者、系统集成商、现场设备和网络设备的制造商提供支持。它还增加了采购选择，减少了系统成本，提供对生命周期的管理帮助。明显节省控制系统在运行、工程和维护的费用。</br>
-                                                    IEC 62453系列标准的目标是支持：</br>
-                                                    （1）用于异类现场总线环境、多个制造商设备、功能块和模块化子系统的通用工厂层面工具，实现所有自动化领域（比如：流程自动化、工厂自动化和类似监视与控制应用）生命周期管理；</br>
-                                                    （2）控制系统中包括现场总线、设备、功能块和模块子系统间，实现综合和一致的生命周期数据交换；</br>
-                                                    （3）简单和强大的制造商独立性特征，可以把不同自动化设备、功能块和模块化子系统集成到一个控制系统的生命周期管理工具之中。</br>
+                                                <p><strong><a href="#" target="_blank">日本工业价值链参考架构</a></strong></p>
+                                                <p><br>工业价值链计划（Industrial Value Chain Initiative，IVI）是日本应对第四次工业革命的战略，它由制造业企业、设备厂商、系统集成商等发起成立组织，旨在推动网络工厂的实现。2016年12月8日，IVI基于日本制造业的现有基础，推出了Industrial Value Chain Reference Architecture，IVRA，即工业价值链参考架构。</br>
+                                                    有分析认为，与RAMI4.0活IIRA相比，IVRA的一大特征是通过SMU等形式，纳入了包括具体的员工操作等在内的“现场感”特征。日本制造业以丰田生产方式为代表，一般都是通过人力最大化，来提升现场生产能力，实现效益增长。IVI向全世界发布的智能工厂新参考架构嵌入了“日本制造业”的特有价值导向，期望成为世界智能工厂的另一个标准。</br>
 
                                                 </p>
                                                 <p>&nbsp;</p>
+                                                <a href="http://localhost:8080/file/files/2018年版国家智能制造标准体系建设指南.pdf">文档下载</a>
 
 
                                             </td></tr></tbody></table></td></tr>
@@ -130,6 +130,9 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script th:src="@{/js/bootstrap.js}"> </script>
+
+</body>
+
 
 </body>
 </html>
