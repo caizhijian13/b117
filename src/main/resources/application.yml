@@ -18,7 +18,8 @@ spring:
       #在控制台输出用到的数据库语句
     show-sql: true
   thymeleaf:
-    prefix: classpath:/templates/
+    prefix:
+      classpath: /templates
     suffix: .html
     cache: false
     mode: LEGACYHTML5

@@ -62,80 +62,8 @@
 </style>
 <body class="cbp-spmenu-push">
 <!-- header-starts -->
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">纺织服装知识图谱</a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <div class="profile_details_left"><!--notifications of menu start -->
-                <ul class="nav navbar-nav navbar-left">
-                    <li>
-                        <!--<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">-->
-                        <a href="/index">首页</a>
-                        <!--</button>-->
-                    </li>
-                    <li >
-                        <a href="/test" >穿戴搭配 </a>
-                    </li>
-                    <li >
-                        <a href="/colors" >潮流速递 </a>
-                    </li>
-                    <li >
-                        <a href="/fabric" >面料厂家 </a>
-                    </li>
-                </ul>
-                <!--<div class="clearfix"> </div>-->
-                <!--&lt;!&ndash;notification menu end &ndash;&gt;-->
-                <!--<div class="clearfix"> </div>-->
-            </div>
-            <div class="header-left" style="margin-left: 5%">
+<div class="header" th:include="header::header"></div>
 
-                <!--search-box-->
-                <div class="row" style="margin-top: 1%">
-                    <form class="input" id="search_head" action="/search" method="post">
-                        <div class="col-md-8">
-                            <input class="sb-search-input input__field--madoka" name="search_name" placeholder="Search..." type="search" id="search" />
-                            <label class="input__label" for="search">
-                                <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
-                                    <path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
-                                </svg>
-                            </label>
-                        </div>
-                        <div class="col-md-4">
-                            <!--<span class="input-group-btn" >-->
-                            <button class="btn btn-default" type="submit" id = "bn1">搜索</button>
-                            <!--</span>-->
-                        </div>
-                    </form>
-                </div><!--//end-search-box-->
-
-
-                <!--<div class="clearfix"> </div>-->
-                <!--</div>-->
-                <!--<div class="clearfix"> </div>-->
-            </div>
-            <div class="profile_details_right">
-                <ul class="nav navbar-nav navbar-left">
-                    <li th:unless="${session.username}"><a href="/login">登录</a></li>
-                    <li th:unless="${session.username}"><a href="/register">注册</a></li>
-                    <li th:if="${session.username}" class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> [[${session.username}]] <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/logout">退出登录</a> </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</nav>
 <!-- //header-ends -->
 <div class="col-md-12">
 
