@@ -28,8 +28,12 @@ public class NodeService {
         while(result.hasNext()){
             int source;
             Node node = result.next();
-            Map<String,Object> no = map("id",node.getId(),"name",node.getName(),"description",node.getDescription(),
-                                        "lable",node.getMyClass(),"size",node.getSize());
+            Map<String,Object> no = new HashMap<>();
+            no.put("id",node.getId());
+            no.put("name",node.getName());
+            no.put("description",node.getDescription());
+            no.put("lable",node.getMyClass());
+            no.put("size",node.getSize());
             if(Allnodes.indexOf(no)==-1){
                 Allnodes.add(no);
                 source = i++;
@@ -37,21 +41,14 @@ public class NodeService {
             else{
                 source = Allnodes.indexOf(no);
             }
-//            if(node.getRelationships() != null){
-//                for(Relationship re: node.getRelationships()){
-//                    Map<String,Object> nodee = map("id",re.getEndNode().getId(),"name",re.getEndNode().getName(),"description",re.getEndNode().getDescription());
-//                    int target = Allnodes.indexOf(nodee);
-//                    if(target == -1){
-//                        Allnodes.add(nodee);
-//                        target = i++;
-//                    }
-//                    rels.add(map("source",source,"target",target));
-//                }
-//            }
             if(node.getLowerInclude() != null){
                 for(Relationship re: node.getLowerInclude()){
-                    Map<String,Object> nodee = map("id",re.getEndNode().getId(),"name",re.getEndNode().getName(),"description",re.getEndNode().getDescription(),
-                                                    "lable",re.getEndNode().getMyClass(),"size",re.getEndNode().getSize());
+                    Map<String,Object> nodee = new HashMap<>();
+                    nodee.put("id",re.getEndNode().getId());
+                    nodee.put("name",re.getEndNode().getName());
+                    nodee.put("description",re.getEndNode().getDescription());
+                    nodee.put("lable",re.getEndNode().getMyClass());
+                    nodee.put("size",re.getEndNode().getSize());
                     int target = Allnodes.indexOf(nodee);
                     if(target == -1){
                         Allnodes.add(nodee);
@@ -237,6 +234,11 @@ public class NodeService {
                     rels.add(map("source",source,"target",target,"type","匹配"));
                 }
             }
+        }
+        int index = 0;
+        for (Map<String,Object> m: Allnodes
+             ) {
+            m.put("index",index++);
         }
         return map("nodes",Allnodes,"links",rels);
     }
