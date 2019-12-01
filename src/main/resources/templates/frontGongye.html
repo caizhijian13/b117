@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<!--<head th:replace="common::page-head-link">-->
+<head>
+</head>
+
+<body>
+<!--头部-->
+<!--<div th:replace="common::common-head"></div>-->
+
+<!--下部整体-->
+<div class="container-fluid" style="margin-top: 31px; height: 600px; border: 0px solid pink" >
+    <div class="col-md-2" style="border: 0px solid black; width: 248px;">
+        <!--<div th:replace="common::under-part-back-left"></div>-->
+
+    </div>
+    <div class="col-md-10" style="border:  0px solid black; width: 1300px; height: 800px; padding-left: 50px; margin-left: 109px;" id="graph">
+
+        <!--<div>-->
+            <!--<a class="btn btn-default" style="float: right" th:href="@{person}" role="button">人物详情</a>-->
+            <!--<a class="btn btn-default" style="float: right" th:href="@{alg}" role="button">算法详情</a>-->
+        <!--</div>-->
+    </div>
+
+    <!--<div class="row">-->
+    <!--<div class="col-md-2"></div>-->
+    <!--<div class="container col-md-10">-->
+        <!--<a href="/info?id=269">-->
+            <!--<button >详情页</button>-->
+        <!--</a>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <style type="text/css">
+        .node { fill:#2aabd2 ;stroke: #222; stroke-width: 1.5px; }
+
+        .link { stroke: #999; stroke-opacity: .6; stroke-width: 1px; }
+    </style>
+    <script src="http://d3js.org/d3.v3.min.js" type="text/javascript"></script>
+    <!--<script src="http://d3js.org/d3.v5.js" type="text/javascript"></script>-->
+
+    <script type="text/javascript" th:inline="javascript">
+        //D3js格式显示
+        var width = 1200, height = 700;
+
+        var force = d3.layout.force()
+            .charge(-400)          // 设定节点的电荷数
+            .linkDistance(90)           //设定连线的距离
+            .size([width, height]);   //设定作用范围
+
+
+        d3.json("/graph?id="+2266 , function pig(graph) {
+
+            force.nodes(graph.nodes).links(graph.links).start();
+
+            var zoom = d3.behavior.zoom()
+                .scaleExtent([0.5, 1.5])
+                .on("zoom", zoomed);
+
+            function zoomed(){//缩放函数
+                svg.selectAll("g").attr("transform",//svg下的g标签移动大小
+                    "translate("+d3.event.translate+")scale("+d3.event.scale+")");
+                // d3.event.translate 是平移的坐标值，d3.event.scale 是缩放的值。
+            }
+
+            var svg = d3.select("#graph")
+                .append("svg")     // 画布
+                .attr("width", width)
+                .attr("height", height)
+                .attr("pointer-events", "all")
+                .call(zoom);
+
+
+            var link = svg.selectAll("line").append("g")
+                .data(graph.links)
+                .enter()
+                .append("g")
+                .append("line")
+                // .attr("class", "link")
+                .style("stroke","#ccc")
+                .style("stroke-width",1)
+                .call(drag());
+
+            var color = d3.scale.category20();
+
+            function drag(){//拖拽函数
+                return force.drag()
+                    .on("dragstart",function(d){
+                        d3.event.sourceEvent.stopPropagation(); //取消默认事件
+                        d.fixed = true;    //拖拽开始后设定被拖拽对象为固定
+                    });
+            }
+
+            var node = svg.selectAll("circle")
+                .data(graph.nodes)
+                .enter()
+                .append("g")
+                .append("circle")
+                .attr("r", 20)
+                .style("fill",function (d,i) {
+                    return color(i);
+                })
+                .call(drag())
+
+                 //添加 点击事件
+              /*  .on("click",function(d){
+
+                    window.open('https://baike.baidu.com/item/'+d.name)
+                })*/
+                .call(force.drag)    //允许拖动
+                .on("dblclick",function(d){
+                        //双击节点时节点恢复拖拽
+                        window.open('time1')
+                    });
+
+            svg.selectAll("g").call(drag());//为svg下的所有g标签添加拖拽事件
+            svg.on("dblclick.zoom", null);//取消svg和圆圈的双击放大事件（d3中默认开启7个事件，关闭防止与上面的双击事件冲突）
+            // circle.on("dblclick.zoom", null);
+            zoom.translate([242,180]);
+            zoom.scale(zoom.scale() * 0.4);
+            svg.selectAll("g").attr("transform","translate(242,180)scale(0.4)");
+
+
+            //设置圆圈和文字的坐标
+            function transform1(d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            }
+
+            // 添加描述节点的文字
+            var texts = svg.selectAll("text")
+                .data(graph.nodes)
+                .enter()
+                .append("g")
+                .append("text")
+                .style("fill", "black")
+                .attr("dx", 20)
+                .attr("dy", 0)
+                .text(function (d) {return d.name})
+                .call(drag());
+
+            /* var drag = d3.behavior.drag()
+                 .origin(function (d) {
+                     return d;
+                 })
+                 .on("dragstart",dragstarted)
+                 .on("drag",dragged)
+                 .on("dragend",dragended)
+             function dragstarted(d){
+                 d3.event.sourceEvent.stopPropagation();
+                 d3.select(this).classed("dragging",true);
+                 force.start();
+             }
+             function dragged(d){
+                 d3.select(this).attr("cx",d.x = d3.event.x)
+                     .attr("cy",d.y = d3.event.y);
+             }
+             function dragended(d){
+                 d3.select(this).classed("dragging",false);
+
+             }*/
+
+            // force feed algo ticks拖拽反馈
+            force.on("tick", function() {
+                link.attr("x1", function(d) { return d.source.x; })
+                    .attr("y1", function(d) { return d.source.y; })
+                    .attr("x2", function(d) { return d.target.x; })
+                    .attr("y2", function(d) { return d.target.y; });
+
+                node.attr("cx", function(d) { return d.x; })
+                    .attr("cy", function(d) { return d.y; });
+
+                texts.attr("x",function (d) { return d.x})
+                    .attr("y",function (d) { return d.y});
+            });
+
+            // 初始化图形的大小和位置
+            /*zoom.translate([242,180]);
+            zoom.scale(zoom.scale() * 0.4);
+            svg.selectAll("g").attr("transform",//svg下的g标签移动大小
+                "translate(242,180)scale(0.4)");*/
+
+        });
+    </script>
+
+</div>
+</body>
+</html>

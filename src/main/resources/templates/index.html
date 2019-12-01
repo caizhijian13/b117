@@ -36,23 +36,23 @@
 
 </head>
 <style>
-    .text { font-size: 14px; pointer-events: none; }
-    .node { fill:#bee0fc; stroke: #bee0fc; stroke-width: 1px; }
-    .node.no1{fill:#483d8b;}
-    .node.no2{fill:#4169e1;}
-    .node.Instantiation{fill:#FFE4B5;}
-    .node.LFabric{fill:#FFE4B5;}
-    .node.Concept{fill:#20b2aa;}
-    .node.Color{fill:#20b2aa;}
-    .node.Detail{fill:#20b2aa;}
-    .node.Fabric{fill:#20b2aa;}
-    .node.Silhouette{fill:#20b2aa;}
-    .node.Style{fill:#20b2aa;}
-    .node.Trend{fill:#20b2aa;}
-    .node.Recommend{fill:#8fbc8f;}
-    .node.no6{fill:#7fffd4;}
-    .node.Design{fill:#F5FFFA;}
-    .node.Example{fill:#F5FFFA;}
+    .text { font-size: 14px; pointer-events: none; color:black; }
+    .circle { fill:#bee0fc; stroke: #bee0fc; stroke-width: 1px; }
+    .circle.no1{fill:#483d8b;}
+    .circle.no2{fill:#4169e1;}
+    .circle.Instantiation{fill:#FFE4B5;}
+    .circle.LFabric{fill:#FFE4B5;}
+    .circle.Concept{fill:#20b2aa;}
+    .circle.Color{fill:#20b2aa;}
+    .circle.Detail{fill:#20b2aa;}
+    .circle.Fabric{fill:#20b2aa;}
+    .circle.Silhouette{fill:#20b2aa;}
+    .circle.Style{fill:#20b2aa;}
+    .circle.Trend{fill:#20b2aa;}
+    .circle.Recommend{fill:#8fbc8f;}
+    .circle.no6{fill:#7fffd4;}
+    .circle.Design{fill:#F5FFFA;}
+    .circle.Example{fill:#F5FFFA;}
     .link { stroke: #999; stroke-opacity: .6; stroke-width: 3px; }
     .link.fit { stroke: #cd201f; stroke-opacity: .6; stroke-width: 3px;}
     .link.unfit {stroke: #00ad45; stroke-opacity: .6; stroke-width: 3px;}
@@ -82,7 +82,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="jumbotron text-center" >
-                <h1>纺织服装知识图谱</h1>
+                <h1>时尚穿戴知识图谱</h1>
             </div>
         </div>
     </div>
@@ -177,21 +177,32 @@
 <script src="http://d3js.org/d3.v3.min.js" type="text/javascript"></script>
 <script>
     window.onload = draw(2266);
-
     function draw(id) {
         $("#graph").empty();
         var mark = id;
-        var width = 1200;
-        var height = 500;
+        var width = 1100;
+        var height = 390;
 
         var force = d3.layout.force()
             .size([width,height])    //指定范围
             .linkDistance(150)       //指定连线长度
             .charge(-400);           //相互之间的作用力
 
+        var zoom = d3.behavior.zoom()
+            .scaleExtent([0.5, 1.5])
+            .on("zoom", zoomed);
+
+        function zoomed(){//缩放函数
+            svg.selectAll("g").attr("transform",//svg下的g标签移动大小
+                "translate("+d3.event.translate+")scale("+d3.event.scale+")");
+            // d3.event.translate 是平移的坐标值，d3.event.scale 是缩放的值。
+        }
+
         var svg = d3.select("#graph").append("svg")
             .attr("width",width).attr("height",height)
-            .attr("pointer-events","all");
+            .attr("pointer-events","all")
+            .attr("style","background-color: #F9FBFD")
+            .call(zoom);
 
         d3.json("/graph?id="+mark,function (error,graph) {
             if(error) return;
@@ -209,59 +220,114 @@
                 .attr("markerHeight",10)
                 .attr("orient","auto")//绘制方向，可设定为：auto（自动确认方向）和角度值
                 .attr("stroke-width",2)//箭头宽度
+                .append("g")
                 .append("path")
                 .attr("d","M0,-5L10,0L0,5")//箭头的路径
                 .attr('fill','#000000');//箭头颜色
 
-            //设置连接线
-            var svg_edges = svg.selectAll(".link")
+            // 5.关系图添加线
+            // 5.1  每条线是个容器，有线 和一个装文字的容器
+            var svg_edges = svg
+                .selectAll("g.edge")
                 .data(graph.links)
                 .enter()
-                .append("line")
+                .append("g")
+                .attr("class", "edge")
+                .call(drag())
+                .on('mouseover', function () {
+                    d3.select(this).selectAll('path.links').attr('stroke-width', 4);
+                })
+                .on('mouseout', function () {
+                    d3.select(this).selectAll('path.links').attr('stroke-width', 1);
+                })
+                .on('click', function (d) {
+                    console.log('线click')
+                });
+
+            // 5.2 添加线
+            var svg_links = svg_edges.append("line").attr("class", "links")
                 .attr({
                     // 'd': function (d) { return 'M '+d.source.x+' '+d.source.y+' L '+d.target.x+' '+d.target.y},
                     'id':function (d,i) {return 'link'+i;}
                 })
-                .attr("class",function (d) {
-                    if(d.type=="适合")
-                        return "link fit";
-                    else if(d.type=="不适合")
-                        return "link unfit";
-                    else
-                        return "link";
-                })
                 .attr("marker-end","url(#resolved)")//根据箭头标记的id号标记箭头
+                // .attr("refX",this.config.r)
+                .attr('stroke',"#999");
 
-            //线上文字
-            var links_text = svg
-                .selectAll(".text")
-                .data(graph.links)
-                .enter()
-                .append("text")
-                .style("fill","black")
-                .attr("x",function(e){
-                    console.log(e.source.x+"+"+e.target.x);
-                    return (e.source.x+e.target.x)/2;
-                })
-                .attr("y",function(e){
-                    console.log(e.source.y+"+"+e.target.y);
-                    console.log(e.type);
-                    return (e.source.y+e.target.y)/2;
-                })
-                .attr("font-size",12)
-                .text(function(e){
-                    return e.type}); //线上文字
+            // // 5.3 添加关系文字的容器
+            // var syg_rect_g = svg_edges.append("g").attr("class", "rect_g")
+            //     .call(drag());
 
-            links_text.append("title")
-                .text(function (d) {
-                    return d.relativity;
-                })
+            // // 5.4 添加rect
+            // var rects = syg_rect_g.append("rect")
+            //     .attr("width", 40)
+            //     .attr("height", 20)
+            //     .attr("fill", "white")
+            //     .attr('stroke',"#999");
 
-            //添加节点
-            var svg_nodes = svg.selectAll(".node")
+            // 5.5 文本标签  坐标（x,y）代表 文本的左下角的点
+            var link_texts = svg_edges.append("text")
+                .attr("text-anchor", "middle")  // <text>文本中轴对齐方式居中  start | middle | end
+                .style("font-size", 12).text(d => {
+                    return d.type;
+                });
+
+            // //设置连接线
+            // var svg_edges = svg.selectAll(".link")
+            //     .data(graph.links)
+            //     .enter()
+            //     .append("g")
+            //     .append("line")
+            //     .attr({
+            //         // 'd': function (d) { return 'M '+d.source.x+' '+d.source.y+' L '+d.target.x+' '+d.target.y},
+            //         'id':function (d,i) {return 'link'+i;}
+            //     })
+            //     .attr("class",function (d) {
+            //         if(d.type=="适合")
+            //             return "link fit";
+            //         else if(d.type=="不适合")
+            //             return "link unfit";
+            //         else
+            //             return "link";
+            //     })
+
+            // //线上文字
+            // var links_text = svg
+            //     .selectAll(".text")
+            //     .data(graph.links)
+            //     .enter()
+            //     .append("g")
+            //     .append("text")
+            //     .style("fill","black")
+            //     .attr("x",function(e){
+            //         console.log(e.source.x+"+"+e.target.x);
+            //         return (e.source.x+e.target.x)/2;
+            //     })
+            //     .attr("y",function(e){
+            //         console.log(e.source.y+"+"+e.target.y);
+            //         console.log(e.type);
+            //         return (e.source.y+e.target.y)/2;
+            //     })
+            //     .attr("font-size",12)
+            //     .text(function(e){
+            //         return e.type}); //线上文字
+            //
+            // links_text.append("title")
+            //     .text(function (d) {
+            //         return d.relativity;
+            //     })
+
+            //节点容器
+            var g_nodes = svg
+                .selectAll("g.node")
                 .data(graph.nodes)
                 .enter()
-                .append("circle")
+                .append("g")
+                .attr("class", "node")
+                .call(drag())
+
+            //添加节点
+            var svg_nodes = g_nodes.append("circle")
                 .attr('r',function (d) {
                     // if(d.label=="node")
                     //     return 30-2*d.label;
@@ -269,24 +335,25 @@
                     if(d.id == 2266)
                         return 35;
                     else
-                        // $.get("/findKidsById?id="+d.id,function (data) {
-                        //     size = 20+ data/100;
-                        // })
+                    // $.get("/findKidsById?id="+d.id,function (data) {
+                    //     size = 20+ data/100;
+                    // })
 
-                    return d.size;
+                        return d.size;
                 })
                 .attr("class",function (d) {
                     // if(d.label=="node")
                     //     return "node "+"no"+d.level;
                     // else
 
-                        return "node "+d.lable;
+                    return "circle "+d.lable;
                 })
                 // .on("click",function (d) {
                 //     nowname = d.name;
                 //     showDetail(d.id);
                 // })
-                .call(force.drag)
+                // .call(force.drag)
+                .call(drag())
                 .on("dblclick",function (d) {
                     // var url = "/search?search_name="+d.name;
                     if (d.name == "相关标准") {
@@ -297,15 +364,21 @@
                     // location.href = url;
                         draw(d.id);
                 })
-            ;
-            svg_nodes.append("title")
-                .text(function (d) {
-                    return d.description;
+                .on('mouseover', function (d) {
+                    d3.select(this).attr('stroke-width', '8');
+                    d3.select(this).attr('stroke', '#a3e5f9');
+
+                    highlightObject(d);
+
                 })
+                .on('mouseout', function (d) {
+                    d3.select(this).attr('stroke-width', 4);
+                    d3.select(this).attr('stroke', '#c5dbf0');
+                    highlightObject(null);
+                })
+            ;
             //添加描述节点的文字
-            var svg_texts = svg.selectAll(".text")
-                .data(graph.nodes)
-                .enter()
+            var svg_texts = g_nodes
                 .append("text")
                 .style("fill","black")
                 .attr("class","text")
@@ -313,31 +386,157 @@
                 .attr("font-size",32)
                 .text(function (d) {
                     return d.name;
+                });
+            // var svg_nodes = svg.selectAll(".node")
+            //     .data(graph.nodes)
+            //     .enter()
+            //     .append("g")
+            //     .append("circle")
+            //     .attr('r',function (d) {
+            //         // if(d.label=="node")
+            //         //     return 30-2*d.label;
+            //         // else
+            //         if(d.id == 2266)
+            //             return 35;
+            //         else
+            //             // $.get("/findKidsById?id="+d.id,function (data) {
+            //             //     size = 20+ data/100;
+            //             // })
+            //
+            //             return d.size;
+            //     })
+            //     .attr("class",function (d) {
+            //         // if(d.label=="node")
+            //         //     return "node "+"no"+d.level;
+            //         // else
+            //
+            //             return "node "+d.lable;
+            //     })
+            //     // .on("click",function (d) {
+            //     //     nowname = d.name;
+            //     //     showDetail(d.id);
+            //     // })
+            //     // .call(force.drag)
+            //     .call(drag())
+            //     .on("dblclick",function (d) {
+            //         // var url = "/search?search_name="+d.name;
+            //         if (d.name == "相关标准") {
+            //             // var url = encodeURI("standards.html");
+            //             location.href = "/standards";
+            //         }
+            //         else
+            //         // location.href = url;
+            //             draw(d.id);
+            //     })
+            //     .on('mouseover', function (d) {
+            //         d3.select(this).attr('stroke-width', '8');
+            //         d3.select(this).attr('stroke', '#a3e5f9');
+            //
+            //         highlightObject(d);
+            //
+            //     })
+            //     .on('mouseout', function (d) {
+            //         d3.select(this).attr('stroke-width', 4);
+            //         d3.select(this).attr('stroke', '#c5dbf0');
+            //         highlightObject(null);
+            //     })
+            // ;
+            function drag(){//拖拽函数
+                return force.drag()
+                    .on("dragstart",function(d){
+                        d3.event.sourceEvent.stopPropagation(); //取消默认事件
+                        d.fixed = true;    //拖拽开始后设定被拖拽对象为固定
+                    });
+            }
+            svg_nodes.append("title")
+                .text(function (d) {
+                    return d.description;
                 })
+            // //添加描述节点的文字
+            // var svg_texts = svg.selectAll(".text")
+            //     .data(graph.nodes)
+            //     .enter()
+            //     .append("g")
+            //     .append("text")
+            //     .style("fill","black")
+            //     .attr("class","text")
+            //     .attr("text-anchor","middle")
+            //     .attr("font-size",32)
+            //     .text(function (d) {
+            //         return d.name;
+            //     })
 
-            force.on("tick",function () {  //对于每一个时间间隔
+            // svg.selectAll("g").call(drag());//为svg下的所有g标签添加拖拽事件
+            svg.on("dblclick.zoom", null);//取消svg和圆圈的双击放大事件（d3中默认开启7个事件，关闭防止与上面的双击事件冲突）
 
-                //更新连线坐标
-                svg_edges.attr("x1",function (d) {return d.source.x; })
-                    .attr("y1",function (d) {return d.source.y; })
-                    .attr("x2",function (d) {return d.target.x; })
-                    .attr("y2",function (d) {return d.target.y; })
-                //更新线上文字坐标
-                links_text
+            // svg.selectAll("g").call(drag());//为svg下的所有g标签添加拖拽事件
+
+            // zoom.translate([242,180]);
+            // zoom.scale(zoom.scale() * 0.4);
+            // svg.selectAll("g").attr("transform","translate(242,180)scale(0.4)");
+
+            // 高亮元素及其相关的元素
+            var dependsNode = [];
+            var dependsLinkAndText = [];
+            function highlightObject(obj) {
+                if (obj) {
+                    var objIndex = obj.index;
+                    dependsNode = dependsNode.concat([objIndex]);
+                    dependsLinkAndText = dependsLinkAndText.concat([objIndex]);
+                    graph.links.forEach((lkItem) => {
+                        if (objIndex == lkItem.source.index) {
+                            console.log(lkItem);
+                        dependsNode = dependsNode.concat([lkItem.target.index]);
+                    } else if (objIndex == lkItem.target.index) {
+                            console.log(lkItem);
+                        dependsNode = dependsNode.concat([lkItem.source.index]);
+                    }
+                });
+                    // 隐藏节点
+                    svg.selectAll('.node').filter((d) => {
+                        return (dependsNode.indexOf(d.index) == -1);
+                }).transition().style('opacity', 0.1);
+                    // 隐藏线
+                    svg.selectAll('.edge').filter((d) => {
+                        // return true;
+                        return ((dependsLinkAndText.indexOf(d.source.index) == -1) && (dependsLinkAndText.indexOf(d.target.index) == -1))
+                }).transition().style('opacity', 0.1);
+
+                } else {
+                    // 取消高亮
+                    // 恢复隐藏的线
+                    svg.selectAll('.node').filter(() => {
+                        return true;
+                }).transition().style('opacity', 1);
+                    // 恢复隐藏的线
+                    svg.selectAll('.edge').filter((d) => {
+                        // return true;
+                        return ((dependsLinkAndText.indexOf(d.source.index) == -1) && (dependsLinkAndText.indexOf(d.target.index) == -1))
+                }).transition().style('opacity', 1);
+                    dependsNode = [];
+                    dependsLinkAndText = [];
+                }
+            }
+
+            // force feed algo ticks拖拽反馈
+            force.on("tick", function() {
+                svg_links.attr("x1", function(d) { return d.source.x; })
+                    .attr("y1", function(d) { return d.source.y; })
+                    .attr("x2", function(d) { return d.target.x; })
+                    .attr("y2", function(d) { return d.target.y; });
+
+                svg_nodes.attr("cx", function(d) { return d.x; })
+                    .attr("cy", function(d) { return d.y; });
+
+                link_texts
                     .attr("x",function(e){
                         return (e.source.x+e.target.x)/2;
                     })
                     .attr("y",function(e){
                         return (e.source.y+e.target.y)/2;
                     });
-                //更新节点坐标
-                svg_nodes.attr("cx",function (d) {return d.x=Math.max(20,Math.min(width-20,d.x)); })
-                    .attr("cy",function (d) {return d.y=Math.max(20,Math.min(width-20,d.y)); })
-
-                //更新文字坐标
                 svg_texts.attr("x",function (d) {return d.x; })
-                    .attr("y",function (d) {return d.y; })
-
+                    .attr("y",function (d) {return d.y; });
             });
         });
 

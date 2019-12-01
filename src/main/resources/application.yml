@@ -2,6 +2,7 @@ spring:
   data:
     neo4j:
       uri: bolt://218.193.154.228
+#      uri: bolt://127.0.0.1
       username: neo4j
       password: 123456
   #mysql配置

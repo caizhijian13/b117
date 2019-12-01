@@ -260,4 +260,7 @@ public class NodeController {
         return "recommend";
     }
 
+    @RequestMapping(value = "/frontGongye")
+    public String toGongye(){return "frontGongye"; }
+
 }
