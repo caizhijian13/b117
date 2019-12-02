@@ -87,11 +87,11 @@ public class Node {
 
     @JsonIgnore
     @org.neo4j.ogm.annotation.Relationship(type = "匹配")
-    private List<Relationship> Match;
+    private List<Match> Match;
 
     @JsonIgnore
     @org.neo4j.ogm.annotation.Relationship(type = "rel")
-    private List<Relationship> rel;
+    private List<Rel> rel;
 
 
 

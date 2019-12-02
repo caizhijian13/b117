@@ -243,7 +243,7 @@ public class NodeService {
                         Allnodes.add(nodee);
                         target = i++;
                     }
-                    rels.add(map("source",source,"target",target,"type","匹配"));
+                    rels.add(map("source",source,"target",target,"type","rel"));
                 }
             }
         }
