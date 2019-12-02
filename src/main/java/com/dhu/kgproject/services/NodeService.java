@@ -234,6 +234,18 @@ public class NodeService {
                     rels.add(map("source",source,"target",target,"type","匹配"));
                 }
             }
+            if(node.getRel() != null){
+                for(Relationship re: node.getRel()){
+                    Map<String,Object> nodee = map("id",re.getEndNode().getId(),"name",re.getEndNode().getName(),"description",re.getEndNode().getDescription(),
+                            "lable",re.getEndNode().getMyClass(),"size",re.getEndNode().getSize());
+                    int target = Allnodes.indexOf(nodee);
+                    if(target == -1){
+                        Allnodes.add(nodee);
+                        target = i++;
+                    }
+                    rels.add(map("source",source,"target",target,"type","匹配"));
+                }
+            }
         }
         int index = 0;
         for (Map<String,Object> m: Allnodes

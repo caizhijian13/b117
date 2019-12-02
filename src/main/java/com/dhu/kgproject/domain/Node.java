@@ -89,6 +89,10 @@ public class Node {
     @org.neo4j.ogm.annotation.Relationship(type = "匹配")
     private List<Relationship> Match;
 
+    @JsonIgnore
+    @org.neo4j.ogm.annotation.Relationship(type = "rel")
+    private List<Relationship> rel;
+
 
 
     public Node() {
