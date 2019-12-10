@@ -57,18 +57,6 @@ public class NodeService {
                     rels.add(map("source",source,"target",target,"type","Include"));
                 }
             }
-            if(node.getUpperInclude() != null){
-                for(Relationship re: node.getUpperInclude()){
-                    Map<String,Object> nodee = map("id",re.getEndNode().getId(),"name",re.getEndNode().getName(),"description",re.getEndNode().getDescription(),
-                                                    "lable",re.getEndNode().getMyClass(),"size",re.getEndNode().getSize());
-                    int target = Allnodes.indexOf(nodee);
-                    if(target == -1){
-                        Allnodes.add(nodee);
-                        target = i++;
-                    }
-                    rels.add(map("source",source,"target",target,"type","INCLUDE"));
-                }
-            }
 
             if(node.getAttribute_of() != null){
                 for(Relationship re: node.getAttribute_of()){
@@ -122,32 +110,6 @@ public class NodeService {
                 }
             }
 
-            if(node.getLowerInstance_of() != null){
-                for(Relationship re: node.getLowerInstance_of()){
-                    Map<String,Object> nodee = map("id",re.getEndNode().getId(),"name",re.getEndNode().getName(),"description",re.getEndNode().getDescription(),
-                                                    "lable",re.getEndNode().getMyClass(),"size",re.getEndNode().getSize());
-                    int target = Allnodes.indexOf(nodee);
-                    if(target == -1){
-                        Allnodes.add(nodee);
-                        target = i++;
-                    }
-                    rels.add(map("source",source,"target",target,"type","Instance_of"));
-                }
-            }
-
-            if(node.getLowerKind_of() != null){
-                for(Relationship re: node.getLowerKind_of()){
-                    Map<String,Object> nodee = map("id",re.getEndNode().getId(),"name",re.getEndNode().getName(),"description",re.getEndNode().getDescription(),
-                                                    "lable",re.getEndNode().getMyClass(),"size",re.getEndNode().getSize());
-                    int target = Allnodes.indexOf(nodee);
-                    if(target == -1){
-                        Allnodes.add(nodee);
-                        target = i++;
-                    }
-                    rels.add(map("source",source,"target",target,"type","Kind_of"));
-                }
-            }
-
             if(node.getNext() != null){
                 for(Relationship re: node.getNext()){
                     Map<String,Object> nodee = map("id",re.getEndNode().getId(),"name",re.getEndNode().getName(),"description",re.getEndNode().getDescription(),
@@ -161,42 +123,6 @@ public class NodeService {
                 }
             }
 
-            if(node.getDesignTrend() != null){
-                for(Relationship re: node.getDesignTrend()){
-                    Map<String,Object> nodee = map("id",re.getEndNode().getId(),"name",re.getEndNode().getName(),"description",re.getEndNode().getDescription(),
-                                                    "lable",re.getEndNode().getMyClass(),"size",re.getEndNode().getSize());
-                    int target = Allnodes.indexOf(nodee);
-                    if(target == -1){
-                        Allnodes.add(nodee);
-                        target = i++;
-                    }
-                    rels.add(map("source",source,"target",target,"type","DesignTrend"));
-                }
-            }
-            if(node.getFabricDesign() != null){
-                for(Relationship re: node.getFabricDesign()){
-                    Map<String,Object> nodee = map("id",re.getEndNode().getId(),"name",re.getEndNode().getName(),"description",re.getEndNode().getDescription(),
-                                                    "lable",re.getEndNode().getMyClass(),"size",re.getEndNode().getSize());
-                    int target = Allnodes.indexOf(nodee);
-                    if(target == -1){
-                        Allnodes.add(nodee);
-                        target = i++;
-                    }
-                    rels.add(map("source",source,"target",target,"type","FabricDesign"));
-                }
-            }
-            if(node.getTrendFabric() != null){
-                for(Relationship re: node.getTrendFabric()){
-                    Map<String,Object> nodee = map("id",re.getEndNode().getId(),"name",re.getEndNode().getName(),"description",re.getEndNode().getDescription(),
-                                                    "lable",re.getEndNode().getMyClass(),"size",re.getEndNode().getSize());
-                    int target = Allnodes.indexOf(nodee);
-                    if(target == -1){
-                        Allnodes.add(nodee);
-                        target = i++;
-                    }
-                    rels.add(map("source",source,"target",target,"type","TrendFabric"));
-                }
-            }
 
             if(node.getFit() != null){
                 for(Relationship re: node.getFit()){
@@ -244,6 +170,30 @@ public class NodeService {
                         target = i++;
                     }
                     rels.add(map("source",source,"target",target,"type","rel"));
+                }
+            }
+            if(node.getCompany_ofs()!= null){
+                for(Relationship re: node.getCompany_ofs()){
+                    Map<String,Object> nodee = map("id",re.getEndNode().getId(),"name",re.getEndNode().getName(),"description",re.getEndNode().getDescription(),
+                            "lable",re.getEndNode().getMyClass(),"size",re.getEndNode().getSize());
+                    int target = Allnodes.indexOf(nodee);
+                    if(target == -1){
+                        Allnodes.add(nodee);
+                        target = i++;
+                    }
+                    rels.add(map("source",source,"target",target,"type","company_of"));
+                }
+            }
+            if(node.getFabric_trends()!= null){
+                for(Relationship re: node.getFabric_trends()){
+                    Map<String,Object> nodee = map("id",re.getEndNode().getId(),"name",re.getEndNode().getName(),"description",re.getEndNode().getDescription(),
+                            "lable",re.getEndNode().getMyClass(),"size",re.getEndNode().getSize());
+                    int target = Allnodes.indexOf(nodee);
+                    if(target == -1){
+                        Allnodes.add(nodee);
+                        target = i++;
+                    }
+                    rels.add(map("source",source,"target",target,"type","fabric_trend"));
                 }
             }
         }

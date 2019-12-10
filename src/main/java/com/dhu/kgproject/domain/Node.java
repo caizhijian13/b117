@@ -78,11 +78,11 @@ public class Node {
     private List<Relationship> Next;
 
     @JsonIgnore
-    @org.neo4j.ogm.annotation.Relationship(type = "适合")
-    private List<Fit> fit;
+    @org.neo4j.ogm.annotation.Relationship(type = "suit_for")
+    private List<Relationship> fit;
 
     @JsonIgnore
-    @org.neo4j.ogm.annotation.Relationship(type = "不适合")
+    @org.neo4j.ogm.annotation.Relationship(type = "unsuit_for")
     private List<Unfit> Unfit;
 
     @JsonIgnore
@@ -93,6 +93,13 @@ public class Node {
     @org.neo4j.ogm.annotation.Relationship(type = "rel")
     private List<Rel> rel;
 
+    @JsonIgnore
+    @org.neo4j.ogm.annotation.Relationship(type = "company_of")
+    private List<company_of> company_ofs;
+
+    @JsonIgnore
+    @org.neo4j.ogm.annotation.Relationship(type = "fabric_trend")
+    private List<fabric_trend> fabric_trends;
 
 
     public Node() {

@@ -40,19 +40,12 @@
     .circle { fill:#bee0fc; stroke: #bee0fc; stroke-width: 1px; }
     .circle.no1{fill:#483d8b;}
     .circle.no2{fill:#4169e1;}
-    .circle.Instantiation{fill:#FFE4B5;}
-    .circle.LFabric{fill:#FFE4B5;}
-    .circle.Concept{fill:#20b2aa;}
-    .circle.Color{fill:#20b2aa;}
-    .circle.Detail{fill:#20b2aa;}
-    .circle.Fabric{fill:#20b2aa;}
-    .circle.Silhouette{fill:#20b2aa;}
-    .circle.Style{fill:#20b2aa;}
+    .circle.instance{fill: #ff7174;}
+    .circle.Fabric{fill:#FFE4B5;}
     .circle.Trend{fill:#20b2aa;}
     .circle.Recommend{fill:#8fbc8f;}
     .circle.no6{fill:#7fffd4;}
     .circle.Design{fill:#F5FFFA;}
-    .circle.Example{fill:#F5FFFA;}
     .link { stroke: #999; stroke-opacity: .6; stroke-width: 3px; }
     .link.fit { stroke: #cd201f; stroke-opacity: .6; stroke-width: 3px;}
     .link.unfit {stroke: #00ad45; stroke-opacity: .6; stroke-width: 3px;}
@@ -95,7 +88,7 @@
 <!--</div>-->
     <div class="row">
         <div class="left_nav" th:replace="header::left_nav"></div>
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div id="graph"></div>
         </div>
     </div>
@@ -180,8 +173,8 @@
     function draw(id) {
         $("#graph").empty();
         var mark = id;
-        var width = 1100;
-        var height = 390;
+        var width = 1500;
+        var height = 600;
 
         var force = d3.layout.force()
             .size([width,height])    //指定范围
