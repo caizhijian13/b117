@@ -107,7 +107,7 @@
                     <!--<form id="search1" method="post">-->
                         <!--<input id="panel-input" name="id" type="text" class="hidden" value="1702">-->
                         <!--<button id="detail-button" type="submit" class="btn btn-info center-block">-->
-                            <a id="detail_name" th:href="${node.url}" target="_blank">
+                            <a id="detail_name" th:href="${'https://baike.baidu.com/item/'+name}" target="_blank">
                                 百科详情
                             </a>
                         <!--</button>-->
@@ -282,12 +282,13 @@
                             $.get(url1,function (data) {
                                 $("#title").text(data.name);
                                 $("#p_describe").text(data.description);
-                                $("#detail_name").attr("href",data.url);
                                 $("#panel-input1").attr("value",data.id);
                                 // location.href = search_d;
                             })
                         }
                         // location.href = url;
+                        var baiduUrl = "https://baike.baidu.com/item/"+nowname;
+                        $("#detail_name").attr("href",baiduUrl);
 
                     })
                 ;

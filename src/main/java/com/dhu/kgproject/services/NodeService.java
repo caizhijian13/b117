@@ -196,6 +196,18 @@ public class NodeService {
                     rels.add(map("source",source,"target",target,"type","fabric_trend"));
                 }
             }
+            if(node.getColor_trends()!= null){
+                for(Relationship re: node.getColor_trends()){
+                    Map<String,Object> nodee = map("id",re.getEndNode().getId(),"name",re.getEndNode().getName(),"description",re.getEndNode().getDescription(),
+                            "lable",re.getEndNode().getMyClass(),"size",re.getEndNode().getSize());
+                    int target = Allnodes.indexOf(nodee);
+                    if(target == -1){
+                        Allnodes.add(nodee);
+                        target = i++;
+                    }
+                    rels.add(map("source",source,"target",target,"type","color_trend"));
+                }
+            }
         }
         int index = 0;
         for (Map<String,Object> m: Allnodes

@@ -86,10 +86,10 @@ public class NodeController {
         Collection<Node> nodes= nodeService.findNodesByNameLike(search_name);
         //Collection<Node> nodelist = nodeService.findByName(search_name);
         if (!nodes.isEmpty()){
-            model.addAttribute("name",search_name);
+            Node node = nodes.iterator().next();
+            model.addAttribute("name",node.getName());
             model.addAttribute("infolist",nodes);
             if(nodes.size() == 1) {
-                Node node = nodes.iterator().next();
                 model.addAttribute("node",node );
                 model.addAttribute("id",node.getId());
                 return new ModelAndView("show_result", "model", model);
