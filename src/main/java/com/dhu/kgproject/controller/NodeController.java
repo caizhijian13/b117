@@ -90,7 +90,7 @@ public class NodeController {
             model.addAttribute("name",node.getName());
             model.addAttribute("infolist",nodes);
             if(nodes.size() == 1) {
-                model.addAttribute("node",node );
+                model.addAttribute("node",node);
                 model.addAttribute("id",node.getId());
                 return new ModelAndView("show_result", "model", model);
             }
