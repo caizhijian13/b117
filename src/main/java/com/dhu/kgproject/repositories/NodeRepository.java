@@ -42,7 +42,7 @@ public interface NodeRepository extends Neo4jRepository<Node,Long> {
     @Query("MATCH (n)-[s]-(m) WHERE id(n)={id} RETURN n,s,m")
     Collection<Node> selectGraphById(@Param("id") Long id);
 
-    @Query("match(n1)<-[r1:Kind_of|Include]-(m),(n2)<-[r2:Kind_of|Include]-(m) where id(n1)={id} and type(r1)=type(r2) return n2")
+    @Query("match(n1)<-[r1]-(m),(n2)<-[r2]-(m) where id(n1)={id} and type(r1)=type(r2) return n2")
     Collection<Node> selectRelatedNodes(@Param("id") Long id);
 
     @Query("match(n)-[r*1..]->(m) where id(n)={id} return count(distinct m)")
