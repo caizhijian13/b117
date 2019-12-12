@@ -1,5 +1,6 @@
 package com.dhu.kgproject.controller;
 
+import com.dhu.kgproject.DTO.Property;
 import com.dhu.kgproject.domain.Company;
 import com.dhu.kgproject.domain.FabricInstance;
 import com.dhu.kgproject.domain.Node;
@@ -107,7 +108,7 @@ public class NodeController {
     @RequestMapping("/search_detail")
     public ModelAndView showDetail(@RequestParam(value = "detailId") Long detailId,Model model){
         Node node = nodeService.selectNodeById(detailId);
-        List<String> propertyList = nodeService.findProperties(detailId);
+        List<Property> propertyList = nodeService.findProperties(detailId);
         String name = node.getName();
         model.addAttribute("name",name);
         Map<String, String> labelList = new HashMap<>();

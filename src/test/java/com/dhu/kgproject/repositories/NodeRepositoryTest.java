@@ -12,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -113,5 +115,15 @@ public class NodeRepositoryTest {
 //            System.out.println(node.getRelationships());
             System.out.println(node.getName());
         }
+    }
+
+    @Test
+    public void test(){
+        Integer a = 1578;
+        Long b = a.longValue();
+        List<String> keys= repository.findPropertiesKey(b);
+        List<String> values = repository.findPropertiesValue(b);
+        System.out.println(keys);
+        System.out.println(values);
     }
 }

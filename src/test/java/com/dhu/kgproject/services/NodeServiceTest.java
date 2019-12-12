@@ -53,4 +53,10 @@ public class NodeServiceTest {
         System.out.println(nodeService.graph(b));
     }
 
+    @Test
+    public void proTest(){
+        String name = "棉麻混纺";
+        System.out.println(nodeService.findPropertiesByName(name));
+    }
+
 }

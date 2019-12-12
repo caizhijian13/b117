@@ -1,6 +1,7 @@
 package com.dhu.kgproject.services;
 
 
+import com.dhu.kgproject.DTO.Property;
 import com.dhu.kgproject.domain.Kind_of;
 import com.dhu.kgproject.domain.Node;
 import com.dhu.kgproject.domain.Relationship;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 @Service
@@ -316,8 +318,45 @@ public class NodeService {
         }
     }
 
-    public List<String> findProperties(Long id ){
-        return repository.findProperties(id);
+    /**
+     * 获取节点的属性集合
+     * @param id
+     * @return
+     */
+    public List<Property> findProperties(Long id ){
+        List<Property> propertyList = new ArrayList<>();
+        List<String> keys = repository.findPropertiesKey(id);
+        List<String> values = repository.findPropertiesValue(id);
+        int length = keys.size();
+        for(int i = 0; i< length; i++){
+
+            if(!keys.get(i).equals("name") && !keys.get(i).equals("description") && !keys.get(i).equals("image")){
+                Property p = new Property();
+                p.setKey(keys.get(i));
+                p.setValue(values.get(i));
+                propertyList.add(p);
+            }
+
+        }
+        return propertyList;
     }
 
+
+    //通过名字获取一个对象的所有属性
+    public Map<String, Object> findPropertiesByName(String name){
+        Collection<Node> nodes = repository.findNodesByNameLike(name);
+        Object node = nodes.iterator().next();
+        Map<String,Object> map = new HashMap<>();
+        Field[] fields = node.getClass().getDeclaredFields();
+        for (Field field:fields
+             ) {
+            field.setAccessible(true);
+            try {
+                map.put(field.getName(),field.get(node));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return map;
+    }
 }

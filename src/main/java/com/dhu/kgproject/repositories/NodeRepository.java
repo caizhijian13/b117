@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -60,5 +61,11 @@ public interface NodeRepository extends Neo4jRepository<Node,Long> {
             "MATCH (n)\n" +
             "WHERE id(n)={id} and n[prop] IS NOT NULL \n" +
             "RETURN prop")
-    List<String> findProperties(@Param("id")Long id);
+    List<String> findPropertiesKey(@Param("id")Long id);
+
+    @Query("CALL db.propertyKeys() YIELD propertyKey AS prop\n" +
+            "MATCH (n)\n" +
+            "WHERE id(n)={id} and n[prop] IS NOT NULL \n" +
+            "RETURN n[prop]")
+    List<String> findPropertiesValue(@Param("id")Long id);
 }
