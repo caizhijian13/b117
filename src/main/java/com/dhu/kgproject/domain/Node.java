@@ -105,6 +105,10 @@ public class Node {
     @org.neo4j.ogm.annotation.Relationship(type = "color_trend")
     private List<Relationship> color_trends;
 
+    @JsonIgnore
+    @org.neo4j.ogm.annotation.Relationship(type = "element_trend")
+    private List<Relationship> element_trends;
+
     public Node() {
     }
 
