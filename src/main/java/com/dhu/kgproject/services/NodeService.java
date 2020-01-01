@@ -4,6 +4,7 @@ package com.dhu.kgproject.services;
 import com.dhu.kgproject.DTO.Property;
 import com.dhu.kgproject.domain.Kind_of;
 import com.dhu.kgproject.domain.Node;
+import com.dhu.kgproject.domain.OtherRelation;
 import com.dhu.kgproject.domain.Relationship;
 import com.dhu.kgproject.repositories.NodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -220,6 +221,18 @@ public class NodeService {
                         target = i++;
                     }
                     rels.add(map("source",source,"target",target,"type","element_trend"));
+                }
+            }
+            if(node.getOtherRel()!= null){
+                for(OtherRelation re: node.getOtherRel()){
+                    Map<String,Object> nodee = map("id",re.getEndNode().getId(),"name",re.getEndNode().getName(),"description",re.getEndNode().getDescription(),
+                            "lable",re.getEndNode().getMyClass(),"size",re.getEndNode().getSize());
+                    int target = Allnodes.indexOf(nodee);
+                    if(target == -1){
+                        Allnodes.add(nodee);
+                        target = i++;
+                    }
+                    rels.add(map("source",source,"target",target,"type",re.getRelName()));
                 }
             }
         }

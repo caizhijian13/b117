@@ -109,6 +109,10 @@ public class Node {
     @org.neo4j.ogm.annotation.Relationship(type = "element_trend")
     private List<Relationship> element_trends;
 
+    @JsonIgnore
+    @org.neo4j.ogm.annotation.Relationship(type = "relation")
+    private List<OtherRelation> otherRel;
+
     public Node() {
     }
 
