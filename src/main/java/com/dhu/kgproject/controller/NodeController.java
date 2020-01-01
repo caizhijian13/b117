@@ -116,6 +116,11 @@ public class NodeController {
         model.addAttribute("node",node);
         model.addAttribute("nodeList",nodeList);
         model.addAttribute("propertyList",propertyList);
+        if(name.contains("K近邻算法"))
+            return new ModelAndView("alg","model",model);
+        else if(name.contains("吴恩达"))
+            return new ModelAndView("person","model",model);
+        else
         return new ModelAndView("show_detail","model",model);
     }
 //    @RequestParam(value = "search_name") String search_name, Model model){
@@ -263,5 +268,37 @@ public class NodeController {
 
     @RequestMapping(value = "/frontGongye")
     public String toGongye(){return "frontGongye"; }
+
+    @RequestMapping(value = "/alg")
+    public String toAlg(){return "alg";}
+
+    @RequestMapping(value = "/person")
+    public String toPerson(){return "person";}
+
+    @RequestMapping(value = "/time1")
+    public String toTime1(){
+        return "time1";
+    }
+    @RequestMapping(value = "/time2")
+    public String toTime2(){
+        return "time2";
+    }
+    @RequestMapping(value = "/time3")
+    public String toTime3(){
+        return "time3";
+    }
+    @RequestMapping(value = "/time4")
+    public String toTime4(){
+        return "time4";
+    }
+    @RequestMapping(value = "/time5")
+    public String toTime5(){
+        return "time5";
+    }
+    @RequestMapping(value = "/time6")
+    public String toTime6(){
+        return "time6";
+    }
+
 
 }

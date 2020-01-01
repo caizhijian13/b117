@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <!--注意 css文件顺序-->
+    <link th:href="@{/css/styleTime.css}" rel="stylesheet" type="text/css">
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel='stylesheet' type='text/css' />
+    <!-- font-awesome icons CSS -->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet">
+    <!-- //font-awesome icons CSS -->
+
+    <!-- side nav css file -->
+    <link th:href="@{/css/SidebarNav.min.css}"  media='all' rel='stylesheet' type='text/css'/>
+    <!-- side nav css file -->
+
+</head>
+<body>
+    <!--头部-->
+    <div class="header" th:include="header::header"></div>
+    <div class="container" style="	margin-top: 72px">
+        <div th:replace="time1::button-place"></div>
+
+        <div class="page-header" style="border-bottom: 0px">    <!-- 去掉底部一条实线-->
+            <h2>1970年 - 1980年 <small>发展年谱</small></h2>
+        </div>
+        <div>
+            <table class="table table-hover" style="font-size: 16px">
+            <tr  style="font-size: 20px; font-weight: 500; ">
+                <td style="width: 60px">NO.</td>
+                <td style="width: 102px">Date</td>
+                <td style="text-align: center;"   >Description</td>
+            </tr>
+            <!--
+            <tr>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+             </tr>
+             -->
+            <tr>
+                <td>1</td>
+                <td>1981年</td>
+                <td>科霍恩(Kohonen)教授首先提出自组织特征映射网(SOM)。</td>
+            </tr>
+                <tr>
+                    <td>2</td>
+                    <td>1982年</td>
+                    <td>美国加州理工学院物理学家J.J.Hopfield提出了Hopfield神经网络。</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>1983年</td>
+                    <td>出现了退火算法。</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>1985年</td>
+                    <td>Hinton和Sejnowski借助统计物理学的概念和方法提出了一种随机神经网络模型——玻尔兹曼机。</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>1986年</td>
+                    <td>Hinton和Sejnowski提出了受限玻尔兹曼机。</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>1986年</td>
+                    <td>Rumelhart，Hinton，Williams发展了BP算法。（多层感知器的误差反向传播算法）。</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>1987年6月</td>
+                    <td>首届国际神经网络学术会议在美国加州圣地亚哥召开。</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>1989年</td>
+                    <td>来自CMU的NavLab将神经网络用于机器人学。</td>
+                </tr>
+        </table>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+</html>

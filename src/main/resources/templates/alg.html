@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link th:href="@{/css/detail/blog.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/detail/style2.css}" rel="stylesheet" type="text/css">
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+
+    <style>
+        .header{
+            background: url("images/pic2.jpg") no-repeat center;
+            -webkit-background-size: cover;
+        }
+
+        /*@media (min-width: 768px) {*/
+            /*.pro-text{*/
+                /*width: 30%;*/
+            /*}*/
+        /*}*/
+
+        .header{
+            background: url(/images/alto-1.jpg) no-repeat center top fixed;
+            padding: 120px 0 110px 0;
+            cursor: default;
+            background-color: #186958;
+
+        }
+
+        /*.header-text h1{*/
+            /*text-align: center;*/
+            /*color:white;*/
+        /*}*/
+        /*.header-text h2 {*/
+            /*font-size: 40px;*/
+            /*font-weight: 600;*/
+            /*line-height: 60px;*/
+        /*}*/
+
+         p.copyright{
+             font-size:15px;
+             color:#fff;
+             font-weight:400;
+         }
+        p.copyright a{
+            color:#2980b9;
+            text-decoration:none;
+        }
+        p.copyright a:hover{
+            color:#fff;
+            -webkit-transition:0.5s all;
+            -o-transition:0.5s all;
+            -moz-transition:0.5s all;
+            -ms-transition:0.5s all;
+        }
+    </style>
+</head>
+<body>
+<!--头部-->
+<!--<div th:replace="common::common-head"></div>-->
+<!--th:style="'background:url('+ @{/css/detail/pic2.jpg}+') no-repeat center; margin-top: 62px ' "-->
+
+<div class="header">
+    <div class="container " style="height: 160px;">
+        <div class="header-text">
+            <!--<a class="btn btn-default" style="float: right" th:href="@{person}" role="button">人物详情</a>-->
+            <h1 style="text-align: center; color: white; font-size: 50px;">算法 BLOG</h1>
+            <p  class="small-text" style="text-align: center; color: white; font-size: 20px">算法（Algorithm）是指解题方案的准确而完整的描述，是一系列解决问题的清晰指令，算法代表着用系统的方法描述解决问题的策略机制。</p>
+            <hr>
+            <h1 style="text-align: center; color: white; font-size: 30px;">K-近邻算法（KNN）</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="background: #f1f1f1;">
+<div class="container "style="background: #f1f1f1; margin-top: 50px">
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+            <!--
+姓名
+国籍
+机构
+职务
+重要奖项
+主要贡献
+科学术语
+其他
+-->
+            <!--   段落 模板
+            <div class="blog-post">
+                <h2 class="blog-post-title">所获荣誉</h2>
+                <div style="text-indent: 2em;">
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+
+                <hr style="border:1px dashed #000; ">-->
+            <div class="blog-post" id="part1">
+                <h2 class="blog-post-title">简介</h2>
+                <div style="text-indent: 2em;">
+                    <p>邻近算法，或者说K最近邻(kNN，k-NearestNeighbor)分类算法是数据挖掘分类技术中最简单的方法之一。所谓K最近邻，就是k个最近的邻居的意思，说的是每个样本都可以用它最接近的k个邻居来代表。
+                    <p>kNN算法的核心思想是如果一个样本在特征空间中的k个最相邻的样本中的大多数属于某一个类别，则该样本也属于这个类别，并具有这个类别上样本的特性。该方法在确定分类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。 kNN方法在类别决策时，只与极少量的相邻样本有关。由于kNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，kNN方法较其他方法更为适合。</p>
+                    </p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+
+                </div>
+            </div>
+
+                <hr style="border:1px dashed #000; ">
+                <!--<blockquote>
+                    <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </blockquote>
+
+                <pre><code>Example code block</code></pre>
+
+                <ul>
+                    <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
+                    <li>Donec id elit non mi porta gravida at eget metus.</li>
+                    <li>Nulla vitae elit libero, a pharetra augue.</li>
+                </ul>
+                <ol>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ol>
+            </div>-->
+
+
+            <div class="blog-post" id="part2">
+                <h2 class="blog-post-title">算法流程</h2>
+                <h4>原理思想</h4>
+                <div style="text-indent: 2em;">
+                    <p>官方：给定测试样本，基于某种距离度量找出训练集中与其最靠近的k个训练样本，然后基于这k个"邻居"的信息来进行预测。
+                        　　</p>
+                    <p>通俗点说：就是计算一个点与样本空间所有点之间的距离，取出与该点最近的k个点，然后统计这k个点里面所属分类比例最大的（“回归”里面使用平均法），则点A属于该分类。k邻近法实际上利用训练数据集对特征向量空间进行划分，并作为其分类的“模型”。
+                    </p>
+                    <p>三个基本要素：k值的选择、距离度量、分类决策规则.如图：</p>
+                    <img class="img-responsive"  th:src="@{/css/detail/knn-1.png}" style="" alt=" "/>
+                    <p>上图中，绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。</p>
+                    <p></p>
+                </div>
+
+
+                <h4>算法计算步骤</h4>
+                    <ol>
+                        <li>算距离： 给定测试对象，计算它与训练集中的每个对象的距离；</li>
+                        <li>找邻居：圈定距离最近的k个训练对象，作为测试对象的近邻；</li>
+                        <li>做分类：根据这k个近邻归属的主要类别，来对测试对象分类；</li>
+                    </ol>
+                <div style="text-indent: 2em;">
+                    <h4>距离的计算方式（相似性度量）：</h4>
+                    <hr>
+                    <h4>　  欧式距离：</h4>
+                    <img class="img-responsive"  th:src="@{/css/detail/knn-2.png}"  style="" alt=" "/>
+                    <h4>　  曼哈顿距离：</h4>
+                    <img class="img-responsive"  th:src="@{/css/detail/knn-3.png}"  style="" alt=" "/>
+                </div>
+
+                　
+
+
+            </div>
+
+            <hr style="border:1px dashed #000; ">
+            <div class="blog-post" id="part3">
+                <h2 class="blog-post-title">优/缺点</h2>
+                    <h4>优点</h4>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <ol>
+                        <li>简单，易于理解，易于实现，无需估计参数，无需训练；</li>
+                        <li>适合对稀有事件进行分类；</li>
+                        <li>特别适合于多分类问题(multi-modal,对象具有多个类别标签)，kNN比SVM的表现要好。</li>
+                    </ol>
+                    <h4>缺点</h4>
+                    <ol>
+                        <li>样本容量较小的类域采用这种算法比较容易产生误分。
+                            <div style="text-indent: 1em;">
+
+                            <p>　该算法在分类时有个主要的不足是，当样本不平衡时，如一个类的样本容量很大，而其他类样本容量很小时，有可能导致当输入一个新样本时，该样本的K个邻居中大容量类的样本占多数。 该算法只计算“最近的”邻居样本，某一类的样本数量很大，那么或者这类样本并不接近目标样本，或者这类样本很靠近目标样本。无论怎样，数量并不能影响运行结果。</p>
+                            </div>
+                        </li>
+                        <li>该方法的另一个不足之处是计算量较大，因为对每一个待分类的文本都要计算它到全体已知样本的距离，才能求得它的K个最近邻点。
+                        </li>
+
+                        <li>可理解性差，无法给出像决策树那样的规则。</li>
+
+                    </ol>
+            </div>
+
+            <hr style="border:1px dashed #000; ">
+            <div class="blog-post" id="part4">
+                <h2 class="blog-post-title">改进策略</h2>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+            </div>
+
+            <hr style="border:1px dashed #000; ">
+            <div class="blog-post" id="part5">
+                <h2 class="blog-post-title">参考文献</h2>
+                <div style="text-indent: 2em;">
+                    <ul>
+                        <a href="https://www.cnblogs.com/erbaodabao0611/p/7588840.html"><li>机器学习之KNN算法</li></a>
+                        <a href="https://baike.baidu.com/item/%E9%82%BB%E8%BF%91%E7%AE%97%E6%B3%95/1151153?fr=aladdin"><li>百度百科-邻近算法</li></a>
+                        <a href="https://www.cnblogs.com/baochuan/p/9756791.html"><li>参考博客</li></a>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <hr style="border:1px dashed #000; ">
+            <nav>
+                <ul class="pager">
+                    <li><a href="#">Previous</a></li>
+                    <li><a href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            <div class="sidebar-module sidebar-module-inset">
+                <h4>About</h4>
+                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            </div>
+            <div class="sidebar-module">
+                <h3>目录</h3>
+                <ol class="list-unstyled">
+                    <li><a href="#part1">简介</a></li>
+                    <li><a href="#part2">算法流程</a></li>
+                    <li><a href="#part3">优/缺点</a></li>
+                    <li><a href="#part4">改进策略</a></li>
+                    <li><a href="#part5">参考文献</a></li>
+                    <li><a href="#">------------</a></li>
+                    <li><a href="#">返回顶部</a></li>
+
+                </ol>
+            </div>
+            <div class="sidebar-module">
+                <h4>Elsewhere</h4>
+                <ol class="list-unstyled">
+                    <li><a href="#">GitHub</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ol>
+            </div>
+        </div><!-- /.blog-sidebar -->
+    </div>
+</div>
+</div>
+<div class="footer" style=" padding:2em 0; text-align:center; background:#2b3b4b;">
+    <div class="container">
+        <p class="copyright">Copyright &copy; 2014.Company name All rights reserved.</p>
+        <a class="btn btn-default" style="background: #2b3b4b; color: white; float: right" th:href="@{front_gongye}" role="button">上一步</a>
+
+    </div>
+</div>
+
+</body>
+</html>

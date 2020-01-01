@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link th:href="@{/css/detail/blog.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/detail/style2.css}" rel="stylesheet" type="text/css">
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <style>
+        p.copyright{
+            font-size:15px;
+            color:#fff;
+            font-weight:400;
+        }
+        p.copyright a{
+            color:#2980b9;
+            text-decoration:none;
+        }
+        p.copyright a:hover{
+            color:#fff;
+            -webkit-transition:0.5s all;
+            -o-transition:0.5s all;
+            -moz-transition:0.5s all;
+            -ms-transition:0.5s all;
+        }
+    </style>
+
+
+</head>
+<body>
+<!--头部-->
+<!--<div th:replace="common::common-head"></div>-->
+<!--<li style="background-image:url(../static/images/1.jpg);">-->
+<!--<li style="background-image:url(../static/images/1.jpg);" th:style="'background:url(' + @{/images/1.jpg} + ');'">-->
+
+
+<div class="header" style="; -webkit-background-size: cover" th:style="'background:url('+ @{/css/detail/pic2.jpg}+') no-repeat center; margin-top: 62px ' ">
+<div class="container" >
+        <div class="col-md-6 header-left">
+            <div class="col-sm-7 pro-pic" >
+                <img class="img-responsive"  style="max-width: 73%" th:src="@{/css/detail/timg.png}"  alt=" "/>
+            </div>
+            <div class="col-sm-5 pro-text" >
+                <h1>吴恩达</h1>
+                <!--<p>出生年月</p>-->
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-md-6 header-right ">
+            <ul class="list-left">
+                <li>Nationality:</li>
+                <li>Occupation:</li>
+                <li>University:</li>
+                <li>Major Achievement: </li>
+            </ul>
+            <ul class="list-right">
+                <!--<li><a href="mailto:info@example.com">mail@example.com</a></li>-->
+                <!--<li><a href="mailto:info@example.com">info@example.com</a></li>-->
+                <li>美国</li>
+                <li>计算机科学家</li>
+                <li>University of California, Berkeley  </li>
+                <li>人工智能和机器学习领域国际最权威学者之一</li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+</div>
+
+<div class="container-fluid" style="background: #f1f2f7;">
+<div class="container "style="background: #f1f2f7; margin-top: 50px">
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+<!--
+姓名
+国籍
+机构
+职务
+重要奖项
+主要贡献
+科学术语
+其他
+-->
+            <!--   段落 模板
+            <div class="blog-post">
+                <h2 class="blog-post-title">所获荣誉</h2>
+                <div style="text-indent: 2em;">
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+
+                <hr style="border:1px dashed #000; ">-->
+            <div class="blog-post">
+                <h2 class="blog-post-title">人物经历</h2>
+                <div style="text-indent: 2em;">
+                    <p>吴恩达1976年出生于伦敦，父亲是一位香港医生，英文名叫Andrew Ng，吴恩达年轻时候在香港和新加坡度过。1992年吴恩达就读新加坡莱佛士书院，并于1997年获得了卡内基梅隆大学的计算机科学学士学位。之后他在1998年获得了麻省理工学院的硕士学位，并于2002年获得了加州大学伯克利分校的博士学位，并从这年开始在斯坦福大学工作。他（2002年）住在加利福尼亚州的帕洛阿尔托。
+                    </p>
+                    <p>吴恩达是斯坦福大学计算机科学系和电子工程系副教授，人工智能实验室主任。吴恩达主要成就在机器学习和人工智能领域，他是人工智能和机器学习领域最权威的学者之一。
+                    </p>
+                    <p>2010年，时任斯坦福大学教授的吴恩达加入谷歌开发团队XLab——这个团队已先后为谷歌开发无人驾驶汽车和谷歌眼镜两个知名项目。
+                    </p>
+                    <p>吴恩达与谷歌顶级工程师开始合作建立全球最大的“神经网络”，这个神经网络能以与人类大脑学习新事物相同的方式来学习现实生活。谷歌将这个项目命名为“谷歌大脑”。
+                    </p>
+                    <p>吴恩达最知名的是，所开发的人工神经网络通过观看一周YouTube视频，自主学会识别哪些是关于猫的视频。这个案例为人工智能领域翻开崭新一页。吴恩达表示，未来将会在谷歌无人驾驶汽车上使用该项技术，来识别车前面的动物或者小孩，从而及时躲避。
+                    </p>
+                    <p>2014年5月16日，百度宣布吴恩达加入百度，担任百度公司首席科学家，负责百度研究院的领导工作，尤其是Baidu Brain计划。
+                    </p>
+                    <p>2014年5月19日，百度宣布任命吴恩达博士为百度首席科学家，全面负责百度研究院。这是中国互联网公司迄今为止引进的最重量级人物。消息一经公布，就成为国际科技界的关注话题。美国权威杂志《麻省理工科技评论》(MIT Technology Review)甚至用充满激情的笔调对未来给予展望：“百度将领导一个创新的软件技术时代，更加了解世界。” </p>
+                    </p>
+                </div>
+            </div>
+
+                <hr style="border:1px dashed #000; ">
+                <!--<blockquote>
+                    <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </blockquote>
+
+                <pre><code>Example code block</code></pre>
+
+                <ul>
+                    <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
+                    <li>Donec id elit non mi porta gravida at eget metus.</li>
+                    <li>Nulla vitae elit libero, a pharetra augue.</li>
+                </ul>
+                <ol>
+                    <li>Vestibulum id ligula porta felis euismod semper.</li>
+                    <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
+                    <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
+                </ol>
+            </div>-->
+
+
+            <div class="blog-post">
+                <h2 class="blog-post-title">所获荣誉</h2>
+                <div style="text-indent: 2em;">
+                    <p>2007年，吴恩达获得斯隆奖（Sloan Fellowship）。
+                    <p>2008年，吴恩达入选“the MIT Technology Review TR35”，即《麻省理工科技创业》杂志评选出的科技创新35俊杰，入选者是35岁以下的35个世界上最顶级的创新者之一。
+                    </p>
+                    <p>“计算机和思想奖”的获得者。
+                    </p>
+                    <p>2013年，吴恩达入选《时代》杂志年度全球最有影响力100人，成为16位科技界代表之一。</p>
+                    </p>
+                </div>
+
+                <hr style="border:1px dashed #000; ">
+            </div>
+
+            <div class="blog-post">
+                <h2 class="blog-post-title">主要成就</h2>
+                <div style="text-indent: 2em;">
+                    <p><h3>在线教育</h3></p>
+                    <p>吴恩达是在线教育平台Coursera的联合创始人，吴恩达在2008年发起了“Stanford Engineering Everywhere”（SEE）项目，这个项目把斯坦福的许多课程放到网上，供免费学习。NG也教了一些课程，如机器学习课程，包含了他录制的视频讲座和斯坦福CS299课程的学生材料。
+                    </p>
+                    <p>吴恩达的理想是让世界上每个人能够接受高质量的、免费的教育。今天，Coursera和世界上一些顶尖大学的合作者们一起提供高质量的免费在线课程。Coursera是世界上最大的MOOC平台。</p>
+                    </p>
+                    <p></p>
+                </div>
+
+                <hr style="border:1px dashed #000; ">
+            </div>
+            <nav>
+                <ul class="pager">
+                    <li><a href="#">Previous</a></li>
+                    <li><a href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            <div class="sidebar-module sidebar-module-inset">
+                <h4>About</h4>
+                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            </div>
+            <div class="sidebar-module">
+                <h4>Archives</h4>
+                <ol class="list-unstyled">
+                    <li><a href="#">March 2014</a></li>
+                    <li><a href="#">February 2014</a></li>
+                    <li><a href="#">January 2014</a></li>
+                    <li><a href="#">December 2013</a></li>
+                    <li><a href="#">November 2013</a></li>
+                    <li><a href="#">October 2013</a></li>
+                    <li><a href="#">September 2013</a></li>
+                    <li><a href="#">August 2013</a></li>
+                    <li><a href="#">July 2013</a></li>
+                    <li><a href="#">June 2013</a></li>
+                    <li><a href="#">May 2013</a></li>
+                    <li><a href="#">April 2013</a></li>
+                </ol>
+            </div>
+            <div class="sidebar-module">
+                <h4>Elsewhere</h4>
+                <ol class="list-unstyled">
+                    <li><a href="#">GitHub</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ol>
+            </div>
+        </div><!-- /.blog-sidebar -->
+    </div>
+</div>
+<div class="footer" style=" padding:2em 0; text-align:center; background:#2b3b4b;">
+    <div class="container">
+        <p class="copyright">Copyright &copy; 2014.Company name All rights reserved.</p>
+        <a class="btn btn-default" style="background: #2b3b4b; color: white; float: right" th:href="@{front_gongye}" role="button">上一步</a>
+
+    </div>
+</div>
+</div>
+
+
+</body>
+</html>
