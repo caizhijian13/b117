@@ -173,6 +173,7 @@
 <script>
     window.onload = draw(2266);
     function draw(id) {
+        $("#graph").bind('mousewheel', function(event, delta) {return false;});
         $("#graph").empty();
         var mark = id;
         var width = 1500;
